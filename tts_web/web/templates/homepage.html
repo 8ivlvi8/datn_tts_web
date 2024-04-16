@@ -5,11 +5,11 @@ Trang chủ
 {% endblock %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css"  href="{% static 'homepage.css' %}">  
+<link rel="stylesheet" type="text/css" href="{% static 'homepage.css' %}">
 <main class="container">
 	<div class="bg-light p-5 rounded">
-		<h1>Nhập văn bản muốn chuyển đổi</h1>
-		<input class="rounded" type="text" id="input-text-area" style="width: 100%; height: 200px;" maxlength="2048">
+		<h1>Chuyển đổi văn bản thành giọng nói</h1>
+		<textarea placeholder="Nhập văn bản cần chuyển đổi" maxlength="2048" name="inputtext" id="inputtext"></textarea>
 		<p>Hỗ trợ tối đa 2048 ký tự.</p>
 		<a class="btn btn-lg btn-primary" href="#" role="button">Chuyển đổi</a>
 

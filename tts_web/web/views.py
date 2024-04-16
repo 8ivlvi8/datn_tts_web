@@ -5,5 +5,5 @@ from django.template import loader
 
 
 def web(request):
-	template = loader.get_template('myfirst.html')
+	template = loader.get_template('homepage.html')
 	return HttpResponse(template.render())

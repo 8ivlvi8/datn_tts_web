@@ -6,10 +6,18 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 
 
+def convert_query_params_to_dict(query_params):
+    params = {}
+    for key, value in query_params.items():
+        params[key] = value
+    return params
+
+
+# Create your views here.
+
 class TTS_API_List(APIView):
     def get(self, request, format=None):
         tts = TextToSpeech.objects.all()
-        print(1)
         serializer = TextToSpeechSerializer(tts, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -33,7 +41,7 @@ class TTS_API_Detail(APIView):
     def put(self, request, pk, format=None):
         try:
             tts = TextToSpeech.objects.get(pk=pk)
-            data = JSONParser().parse(request)
+            data = (convert_query_params_to_dict(request.query_params))
             serializer = TextToSpeechSerializer(tts, data=data)
             if serializer.is_valid():
                 serializer.save()

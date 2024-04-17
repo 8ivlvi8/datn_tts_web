@@ -1,7 +1,10 @@
 from rest_framework import serializers
+from .models import TextToSpeech
 
-class TextToSpeechInputSerializer(serializers.Serializer):
-    text = serializers.CharField(max_length=255)
+# Create a model serializer
 
-class TextToSpeechOutputSerializer(serializers.Serializer):
-    audio_url = serializers.URLField()
+
+class TextToSpeechSerializer(serializers.Serializer):
+    class Meta:
+        model = TextToSpeech
+        fields = ['id', 'text', 'url', 'code']

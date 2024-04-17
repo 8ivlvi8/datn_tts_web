@@ -1,10 +1,7 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from django.urls import path
 from . import views
 
-router = DefaultRouter()
-router.register('text-to-speech', views.TextToSpeechViewSet, basename='text-to-speech')
-
 urlpatterns = [
-    path('', include(router.urls)),
+    path('tts_api/', views.tts_api_list),
+    path('tts_api/<int:pk>/', views.tts_api_detail),
 ]

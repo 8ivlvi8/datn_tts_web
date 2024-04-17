@@ -2,22 +2,22 @@ from tts_api.serializers import TextToSpeechSerializer
 from tts_api.models import TextToSpeech
 from rest_framework.parsers import JSONParser
 from django.http import HttpResponse, JsonResponse
-import edge_tts
-import asyncio
-from django.shortcuts import render
 from django.http import JsonResponse
-from django.http import Http404
 from rest_framework.views import APIView
 
 
 class TTS_API_List(APIView):
     def get(self, request, format=None):
         tts = TextToSpeech.objects.all()
+        print(1)
         serializer = TextToSpeechSerializer(tts, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     def post(self, request, format=None):
-        data = JSONParser().parse(request)
+        text = request.query_params.get('text')
+        code = request.query_params.get('code')
+        url = request.query_params.get('url')
+        data = {'text': text, 'code': code, 'url': url}
         serializer = TextToSpeechSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

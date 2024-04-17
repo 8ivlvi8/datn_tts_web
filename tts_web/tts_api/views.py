@@ -14,11 +14,7 @@ class TTS_API_List(APIView):
         return JsonResponse(serializer.data, safe=False)
 
     def post(self, request, format=None):
-        text = request.query_params.get('text')
-        code = request.query_params.get('code')
-        url = request.query_params.get('url')
-        data = {'text': text, 'code': code, 'url': url}
-        serializer = TextToSpeechSerializer(data=data)
+        serializer = TextToSpeechSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
@@ -53,4 +49,3 @@ class TTS_API_Detail(APIView):
             return HttpResponse(status=204)
         except TextToSpeech.DoesNotExist:
             return HttpResponse(status=404)
-        

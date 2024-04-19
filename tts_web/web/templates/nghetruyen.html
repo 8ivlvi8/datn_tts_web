@@ -26,8 +26,17 @@ Nghe truyện
 			</select>
 		</div>
 	</nav>
-	<iframe src="https://truyenfull.com/" frameborder="0" style="height: 95vh; width: 90vw;"
+	<nav class="navbar">
+		
+		<div>
+			<button id="checkChapterCButton">Kiểm tra phần tử con trong iframe</button>
+
+			<button class="btn btn-primary">Nghe</button>
+		</div>
+	</nav>
+	
+	<iframe src="https://truyenfull.com/" id="viewtruyen" frameborder="0" style="height: 95vh; width: 90vw;"
 		sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
 </main>
-
+<script src="{% static 'js/nghetruyen.js' %}"></script>
 {% endblock %}

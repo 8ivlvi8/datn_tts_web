@@ -1,59 +1,37 @@
 from tts_api.serializers import TextToSpeechSerializer
-from tts_api.models import TextToSpeech
 from rest_framework.parsers import JSONParser
 from django.http import HttpResponse, JsonResponse
 from django.http import JsonResponse
 from rest_framework.views import APIView
+import requests
+from bs4 import BeautifulSoup
 
-
+# Chuyển đổi các tham số truy vấn thành một từ điển
 def convert_query_params_to_dict(query_params):
     params = {}
     for key, value in query_params.items():
         params[key] = value
     return params
 
+def get_text_by_link_and_element(link, element):
+    response = requests.get(link)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    chapter_html = soup.find('div', {'class': element}).prettify()
+    chapter_soup = BeautifulSoup(chapter_html, 'html.parser')
+    # Loại bỏ các thẻ HTML và chỉ giữ lại nội dung văn bản
+    text = chapter_soup.get_text(separator="<br>", strip=True)
+    return str(text)
 
-# Create your views here.
 
-class TTS_API_List(APIView):
+class TTS_API_Get_Text(APIView): 
     def get(self, request, format=None):
-        tts = TextToSpeech.objects.all()
-        serializer = TextToSpeechSerializer(tts, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-    def post(self, request, format=None):
-        serializer = TextToSpeechSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
-
-
-class TTS_API_Detail(APIView):
-    def get(self, request, pk, format=None):
+        url = request.query_params['url']
+        element = request.query_params['element']
+        # print("url: ", url)
+        # print("element: ", element)
         try:
-            tts = TextToSpeech.objects.get(pk=pk)
-            serializer = TextToSpeechSerializer(tts)
-            return JsonResponse(serializer.data)
-        except TextToSpeech.DoesNotExist:
-            return HttpResponse(status=404)
+            extracted_text = get_text_by_link_and_element(url, element)
+            return JsonResponse({'extracted_text': extracted_text}, status=200)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
 
-    def put(self, request, pk, format=None):
-        try:
-            tts = TextToSpeech.objects.get(pk=pk)
-            data = (convert_query_params_to_dict(request.query_params))
-            serializer = TextToSpeechSerializer(tts, data=data)
-            if serializer.is_valid():
-                serializer.save()
-                return JsonResponse(serializer.data)
-            return JsonResponse(serializer.errors, status=400)
-        except TextToSpeech.DoesNotExist:
-            return HttpResponse(status=404)
-
-    def delete(self, request, pk, format=None):
-        try:
-            tts = TextToSpeech.objects.get(pk=pk)
-            tts.delete()
-            return HttpResponse(status=204)
-        except TextToSpeech.DoesNotExist:
-            return HttpResponse(status=404)

@@ -11,10 +11,9 @@ Nghe truyện
 		<div>
 			<h4>Chọn nguồn truyện</h4>
 			<select class="form-select">
-				<option selected>Truyện Full</option>
-				<option value="1">Truyện Cổ Tích</option>
-				<option value="2">Truyện Ngắn</option>
-				<option value="3">Truyện Dài</option>
+				<option selected value="1">Truyện Full</option>
+				<option value="2">Truyện ...</option>
+				<option value="3">Truyện ...</option>
 			</select>
 		</div>
 		<div>
@@ -27,21 +26,14 @@ Nghe truyện
 		</div>
 	</nav>
 	<nav class="navbar">
-		
-		<div>
-			<button id="checkChapterCButton">Kiểm tra phần tử con trong iframe</button>
-
-			<button class="btn btn-primary">Nghe</button>
-		</div>
+		<div id="textContainer"></div>
+		<button id="fetchTextButton">Fetch Text</button>
 	</nav>
-	<div id="externalContent"></div>
-
-	<!-- <iframe src="https://truyenfull.com/" id="viewtruyen" frameborder="0" style="height: 95vh; width: 90vw;"
-		sandbox="allow-forms allow-scripts allow-same-origin"></iframe> -->
 </main>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="{% static 'js/nghetruyen.js' %}"></script>
 {% endblock %}

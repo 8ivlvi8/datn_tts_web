@@ -30,7 +30,8 @@ def get_text_by_link_and_element(link, element):
 class TTS_API_Get_Text(APIView):
     def post(self, request, format=None):
         url = request.query_params.get('url') or request.data.get('url')
-        element = request.query_params.get('element') or request.data.get('element')
+        element = request.query_params.get(
+            'element') or request.data.get('element')
         try:
             extracted_text = get_text_by_link_and_element(url, element)
             return JsonResponse({'extracted_text': extracted_text}, status=200)
@@ -58,19 +59,18 @@ class TTS_API_Get_Audio(APIView):
         return JsonResponse({'message': f'Audio file {output_file} has been generated.'})
 
 
-class TTS_API_Get_Audio_Stream(APIView):
-    async def generate_audio_stream(text, voice):
-        communicate = edge_tts.Communicate(text, voice)
-        async for chunk in communicate.stream():
-            if chunk["type"] == "audio":
-                yield chunk["data"]
-            elif chunk["type"] == "WordBoundary":
-                print(f"WordBoundary: {chunk}")
+async def generate_audio_stream(text, voice):
+    communicate = edge_tts.Communicate(text, voice)
+    async for chunk in communicate.stream():
+        if chunk["type"] == "audio":
+            yield chunk["data"]
+        # elif chunk["type"] == "WordBoundary":
+        #     print(f"WordBoundary: {chunk}")
 
+class TTS_API_Get_Audio_Stream(APIView):
     def post(self, request, format=None):
-        text = str(request.query_params['text'])
-        voice = str(request.query_params['voice'])
-        # Trả về dữ liệu âm thanh dưới dạng streaming
-        response = StreamingHttpResponse(self.generate_audio_stream(
+        text = request.query_params.get('text') or request.data.get('text')
+        voice = request.query_params.get('voice') or request.data.get('voice')
+        response = StreamingHttpResponse(generate_audio_stream(
             text, voice), content_type='audio/mpeg')
         return response

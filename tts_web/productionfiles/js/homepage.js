@@ -1,7 +1,7 @@
-function playAudio() {
+function fetchAudio() {
     const url = 'http://127.0.0.1:8000/api/tts_api/getaudiostream/';
     const requestBody = {
-        text: document.getElementById('textInput').value,
+        text: document.getElementById('inputtext').value,
         voice: 'vi-VN-HoaiMyNeural'
     };
 
@@ -23,7 +23,6 @@ function playAudio() {
             const audioURL = URL.createObjectURL(blob); // Create URL from Blob
             audioPlayer.src = audioURL;
             audioPlayer.play(); // Play audio
-            currentIndex++; // Move to next text
         })
         .catch(error => {
             console.error('Error playing audio:', error);
@@ -32,4 +31,4 @@ function playAudio() {
 
 // Event listener for the button to fetch text
 const fetchTextButton = document.getElementById('convertBtn');
-fetchTextButton.addEventListener('click', fetchText);
+fetchTextButton.addEventListener('click', fetchAudio);

@@ -2113,3 +2113,9 @@ Traceback (most recent call last):
 django.db.utils.OperationalError: no such table: web_nguontruyen
 Not Found: /favicon.ico
 Not Found: /favicon.ico
+Not Found: /favicon.ico
+Forbidden: /api/tts_api/gettext/
+Forbidden: /api/tts_api/gettext/
+Forbidden: /api/tts_api/gettext/
+Forbidden: /api/tts_api/gettext/
+Forbidden: /api/tts_api/gettext/

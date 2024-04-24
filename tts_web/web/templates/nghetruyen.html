@@ -11,23 +11,22 @@ Nghe truyện
 		<div>
 			<h4>Chọn nguồn truyện</h4>
 			<select class="form-select">
-				<option selected value="1">Truyện Full</option>
-				<option value="2">Truyện ...</option>
-				<option value="3">Truyện ...</option>
+				{% for nguonTruyen in list_nguonTruyen %}
+				<option value="{{ nguonTruyen.id }}">{{ nguonTruyen.tenNguonTruyen }}</option>
+				{% endfor %}
 			</select>
 		</div>
-		<div>
-			<h4>Chọn tốc độ đọc</h4>
-			<select class="form-select">
-				<option value="1">Tốc độ chậm</option>
-				<option value="2" selected>Tốc độ trung bình</option>
-				<option value="3">Tốc độ nhanh</option>
-			</select>
+
+		<div id="playbackSpeedControl">
+			<h4>Chọn tốc độ phát</h4>
+			<div>
+				<button id="decreaseSpeedButton">-</button>
+				<span id="currentSpeed">1.0</span>
+				<button id="increaseSpeedButton">+</button>
+			</div>
 		</div>
-	</nav>
-	<nav class="navbar">
 		<button id="fetchTextButton">Fetch Text</button>
-		<!-- <button id="playAudioButton">Play Audio</button> -->
+		<div class="loader" id="loader"></div>
 		<audio controls id="audioPlayer"></audio>
 		<div id="textContainer"></div>
 	</nav>

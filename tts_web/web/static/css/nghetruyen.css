@@ -1,3 +1,82 @@
-.form-select{
-	width: 40vw;
+.form-select {
+	width: 250px;
+}
+
+
+/* Chọn tốc độ phát nút bấm hiển thị giá trị trực quan */
+/* CSS cho phần chọn tốc độ phát */
+#playbackSpeedControl {
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	/* Bo tròn các góc */
+	padding: 10px;
+	width: 250px;
+	background-color: #f9f9f9;
+}
+
+#playbackSpeedControl h4 {
+	margin-bottom: 10px;
+	font-size: 18px;
+	/* Cỡ chữ lớn hơn */
+	color: #333;
+}
+
+#playbackSpeedControl>div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* CSS cho nút giảm tốc độ và tăng tốc độ */
+#decreaseSpeedButton,
+#increaseSpeedButton {
+	padding: 8px 16px;
+	/* Tăng kích thước của nút */
+	font-size: 18px;
+	/* Cỡ chữ lớn hơn */
+	color: #333;
+	background-color: #eaeaea;
+	border: none;
+	border-radius: 20px;
+	/* Bo tròn các góc */
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#decreaseSpeedButton:hover,
+#increaseSpeedButton:hover {
+	background-color: #ddd;
+}
+
+/* CSS cho hiển thị tốc độ hiện tại */
+#currentSpeed {
+	font-size: 18px;
+	/* Cỡ chữ lớn hơn */
+	color: #333;
+	font-weight: bold;
+}
+
+
+
+/* Hiển thị loading khi ấn phát */
+/* CSS cho biểu tượng loading */
+.loader {
+	border: 5px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 5px solid #3498db;
+	width: 50px;
+	height: 50px;
+	animation: spin 2s linear infinite;
+	display: none;
+	/* Mặc định ẩn biểu tượng loading */
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
 }

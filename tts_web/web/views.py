@@ -4,6 +4,7 @@ from django.template import loader
 from django.contrib.auth.models import Group, User
 from rest_framework import permissions, viewsets
 from .serializers import GroupSerializer, UserSerializer
+from .models import nguonTruyen
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -25,8 +26,12 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 
 def tts(request):
-	template = loader.get_template('homepage.html')
-	return HttpResponse(template.render())
+    template = loader.get_template('homepage.html')
+    return HttpResponse(template.render())
+
+
 def web(request):
-	template = loader.get_template('nghetruyen.html')
-	return HttpResponse(template.render())
+    list_nguonTruyen = nguonTruyen.objects.all()
+    context = {'list_nguonTruyen': list_nguonTruyen}
+    template = loader.get_template('nghetruyen.html')
+    return HttpResponse(template.render(context))

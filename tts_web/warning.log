@@ -2119,3 +2119,8 @@ Forbidden: /api/tts_api/gettext/
 Forbidden: /api/tts_api/gettext/
 Forbidden: /api/tts_api/gettext/
 Forbidden: /api/tts_api/gettext/
+Forbidden: /api/tts_api/getaudiostream/
+Forbidden: /api/tts_api/getaudiostream/
+Forbidden: /api/tts_api/getaudiostream/
+Bad Request: /api/tts_api/gettext/
+Not Found: /favicon.ico

@@ -17,9 +17,8 @@ def get_text_by_link_and_element(link, element):
     doan_van_da_tach = []
     temp = ""
     for cau_van in doan_van:
-        if len(temp) < 400:
-            temp += cau_van + ' '
-        else:
+        temp += cau_van + ' '
+        if len(temp) > 200:
             doan_van_da_tach.append(temp)
             temp = ""
     if temp != "":

@@ -1,14 +1,35 @@
+// Function để lấy CSRF token từ cookie
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
 function fetchAudio() {
     const url = 'http://127.0.0.1:8000/api/tts_api/getaudiostream/';
     const requestBody = {
         text: document.getElementById('inputtext').value,
         voice: 'vi-VN-HoaiMyNeural'
     };
+    // Get CSRF token từ cookie
+    const csrftoken = getCookie('csrftoken');
 
     fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken // Bao gồm CSRF token trong headers
         },
         body: JSON.stringify(requestBody)
     })

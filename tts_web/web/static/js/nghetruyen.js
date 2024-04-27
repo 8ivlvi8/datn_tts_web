@@ -17,11 +17,23 @@ function getCookie(name) {
 // Lấy đối tượng tốc độ phát và đối tượng audio
 var currentSpeedDisplay = document.getElementById("currentSpeed");
 var audio = document.getElementById("audioPlayer");
+var urlInput = document.getElementById("urlInput");
+// Kiểm tra xem đã có dữ liệu trong localStorage chưa
+var storedUrl = localStorage.getItem("savedUrl");
+// Nếu có dữ liệu trong localStorage, gán nó cho input
+if (storedUrl) {
+    urlInput.value = storedUrl;
+}
+// Lắng nghe sự kiện input thay đổi
+urlInput.addEventListener("input", function () {
+    // Lưu giá trị của input vào localStorage khi có sự thay đổi
+    localStorage.setItem("savedUrl", urlInput.value);
+});
+
 
 // Đặt tốc độ phát mặc định của audio khi trang được tải
 audio.playbackRate = 2.0;
 currentSpeedDisplay.textContent = audio.playbackRate.toFixed(1); // Hiển thị tốc độ phát hiện tại
-
 
 // Function để giảm tốc độ phát
 document.getElementById("decreaseSpeedButton").addEventListener("click", function () {
@@ -58,9 +70,9 @@ function fetchText() {
     showLoader();
 
     if (textData.length === 0) { // Chỉ fetch văn bản nếu chưa fetch trước đó và không đang trong quá trình fetch
-        const url = 'http://127.0.0.1:8000/api/tts_api/gettext/';
+        const url = 'http://letam.myftp.org:80/api/tts_api/gettext/';
         const requestBody = {
-            url: 'https://truyenfull.com/toan-chuc-cao-thu/chuong-32.html',
+            url: urlInput.value,
             element: 'chapter-c'
         };
 
@@ -102,7 +114,7 @@ function playAudio() {
         return;
     }
 
-    const url = 'http://127.0.0.1:8000/api/tts_api/getaudiostream/';
+    const url = 'http://letam.myftp.org:80/api/tts_api/getaudiostream/';
     const csrftoken = getCookie('csrftoken'); // Lấy CSRF token từ cookie
 
     // Mảng để lưu trữ tất cả các Promise fetch audio
@@ -172,5 +184,5 @@ function fetchAudio(url, csrftoken, text) {
 }
 
 // Sự kiện nghe của nút để fetch văn bản
-const fetchTextButton = document.getElementById('fetchTextButton');
-fetchTextButton.addEventListener('click', fetchText);
+const fetchButton = document.getElementById('fetchButton');
+fetchButton.addEventListener('click', fetchText);

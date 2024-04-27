@@ -17,7 +17,7 @@ function getCookie(name) {
 
 
 function fetchAudio() {
-    const url = 'http://127.0.0.1:8000/api/tts_api/getaudiostream/';
+    const url = 'http://letam.myftp.org:80/api/tts_api/getaudiostream/';
     const requestBody = {
         text: document.getElementById('inputtext').value,
         voice: 'vi-VN-HoaiMyNeural'
@@ -51,5 +51,5 @@ function fetchAudio() {
 }
 
 // Event listener for the button to fetch text
-const fetchTextButton = document.getElementById('convertBtn');
-fetchTextButton.addEventListener('click', fetchAudio);
+const fetchButton = document.getElementById('convertBtn');
+fetchButton.addEventListener('click', fetchAudio);

@@ -8,28 +8,26 @@ Nghe truyện
 <link rel="stylesheet" type="text/css" href="{% static 'css/nghetruyen.css' %}">
 <main class="container" style="margin-top: 60px">
 	<nav class="navbar">
-		<div>
-			<h4>Chọn nguồn truyện</h4>
-			<select class="form-select">
-				{% for nguonTruyen in list_nguonTruyen %}
-				<option value="{{ nguonTruyen.id }}">{{ nguonTruyen.tenNguonTruyen }}</option>
-				{% endfor %}
-			</select>
-		</div>
-
+		<h4>Chọn tốc độ phát</h4>
 		<div id="playbackSpeedControl">
-			<h4>Chọn tốc độ phát</h4>
 			<div>
 				<button id="decreaseSpeedButton">-</button>
 				<span id="currentSpeed">1.0</span>
 				<button id="increaseSpeedButton">+</button>
 			</div>
 		</div>
-		<button id="fetchTextButton">Fetch Text</button>
+		<button id="fetchButton">Phát</button>
 		<div class="loader" id="loader"></div>
 		<audio controls id="audioPlayer"></audio>
 		<div id="textContainer"></div>
+		<input type="text" id="urlInput" placeholder="Dán link truyện vào đây">
+
 	</nav>
+	<div>
+		<iframe src="https://truyenfull.vn/" id="iframeTruyenfull" frameborder="0" sandbox=" allow-same-origin"
+			style="width: 90vw; height: 80vh;"></iframe>
+	</div>
+
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"

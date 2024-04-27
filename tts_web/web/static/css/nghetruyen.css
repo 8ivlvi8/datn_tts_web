@@ -2,15 +2,30 @@
 	width: 250px;
 }
 
+#fetchButton {
+	background-color: #4CAF50; /* Màu nền */
+	color: white; /* Màu chữ */
+	padding: 10px 20px; /* Kích thước nút */
+	font-size: 16px; /* Kích thước chữ */
+	border: none; /* Không viền */
+	border-radius: 5px; /* Bo góc */
+	cursor: pointer; /* Con trỏ khi di chuột qua */
+  }
+  
+  /* Hover style */
+  #fetchButton:hover {
+	background-color: #45a049; /* Màu nền khi di chuột qua */
+  }
+  
 
 /* Chọn tốc độ phát nút bấm hiển thị giá trị trực quan */
 /* CSS cho phần chọn tốc độ phát */
 #playbackSpeedControl {
 	border: 1px solid #ccc;
-	border-radius: 10px;
+	border-radius: 6px;
 	/* Bo tròn các góc */
-	padding: 10px;
-	width: 250px;
+	padding: 4px;
+	width: 150px;
 	background-color: #f9f9f9;
 }
 
@@ -30,7 +45,7 @@
 /* CSS cho nút giảm tốc độ và tăng tốc độ */
 #decreaseSpeedButton,
 #increaseSpeedButton {
-	padding: 8px 16px;
+	padding: 8px 18px;
 	/* Tăng kích thước của nút */
 	font-size: 18px;
 	/* Cỡ chữ lớn hơn */

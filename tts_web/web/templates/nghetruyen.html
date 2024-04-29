@@ -6,26 +6,32 @@ Nghe truyện
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/nghetruyen.css' %}">
-<main class="container" style="margin-top: 60px">
-	<nav class="navbar">
-		<h4>Chọn tốc độ phát</h4>
+<main style="margin: 60px 10px 0px 10px">
+	<nav class="navbar" id="menu">
 		<div id="playbackSpeedControl">
+			<h5 id="playbackSpeedLabel">Tốc độ</h5>
 			<div>
 				<button id="decreaseSpeedButton">-</button>
 				<span id="currentSpeed">1.0</span>
 				<button id="increaseSpeedButton">+</button>
 			</div>
 		</div>
-		<button id="fetchButton">Phát</button>
+		<button id="playAudioButton" onclick="playAudio()">Phát</button>
 		<div class="loader" id="loader"></div>
 		<audio controls id="audioPlayer"></audio>
-		<div id="textContainer"></div>
-		<input type="text" id="urlInput" placeholder="Dán link truyện vào đây">
-
+		<button id="prev_chapter" onclick="updatePrevChapUrl()">Trước</button>
+		<div id="chapterInfo" style="min-width: 500px;">
+			Tên truyện: <span id="truyen_title"> </span>
+			<br>
+			Đang xem: <span id="chapter_title"></span>
+			<br>
+			Link: <input type="text" id="urlInput" placeholder="Dán link truyện vào đây">
+		</div>
+		<button id="next_chapter" onclick="updateNextChapUrl()">Sau</button>
 	</nav>
 	<div>
-		<iframe src="https://truyenfull.vn/" id="iframeTruyenfull" frameborder="0" sandbox=" allow-same-origin"
-			style="width: 90vw; height: 80vh;"></iframe>
+		<iframe src="" id="iframeTruyenfull" frameborder="0"
+			sandbox="allow-scripts allow-same-origin"></iframe>
 	</div>
 
 </main>

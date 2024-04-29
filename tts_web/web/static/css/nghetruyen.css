@@ -2,38 +2,61 @@
 	width: 250px;
 }
 
-#fetchButton {
-	background-color: #4CAF50; /* Màu nền */
-	color: white; /* Màu chữ */
-	padding: 10px 20px; /* Kích thước nút */
-	font-size: 16px; /* Kích thước chữ */
-	border: none; /* Không viền */
-	border-radius: 5px; /* Bo góc */
-	cursor: pointer; /* Con trỏ khi di chuột qua */
-  }
-  
-  /* Hover style */
-  #fetchButton:hover {
-	background-color: #45a049; /* Màu nền khi di chuột qua */
-  }
-  
+iframe {
+	width: 97vw;
+	height: 83vh;
+	padding-top: 10px;
+}
+
+#chapterInfo {
+	margin: 0px 10px;
+	min-width: 400px;
+}
+
+#menu {
+	margin: 0px;
+	padding: 0px 10px;
+	width: 97vw;
+}
+
+#urlInput {
+	width: 80%;
+}
+
+#playbackSpeedLabel {
+	font-weight: bold;
+	text-align: center;
+	margin: 0px;
+}
+
+
+#playAudioButton,
+#prev_chapter,
+#next_chapter {
+	background-color: #4CAF50;
+	color: white;
+	padding: 10px 20px;
+	font-size: 18px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#fetchButton:hover {
+	background-color: #45a049;
+	/* Màu nền khi di chuột qua */
+}
+
 
 /* Chọn tốc độ phát nút bấm hiển thị giá trị trực quan */
 /* CSS cho phần chọn tốc độ phát */
 #playbackSpeedControl {
 	border: 1px solid #ccc;
 	border-radius: 6px;
-	/* Bo tròn các góc */
-	padding: 4px;
-	width: 150px;
+	padding: 3px;
+	width: 130px;
 	background-color: #f9f9f9;
-}
-
-#playbackSpeedControl h4 {
-	margin-bottom: 10px;
-	font-size: 18px;
-	/* Cỡ chữ lớn hơn */
-	color: #333;
 }
 
 #playbackSpeedControl>div {
@@ -45,15 +68,12 @@
 /* CSS cho nút giảm tốc độ và tăng tốc độ */
 #decreaseSpeedButton,
 #increaseSpeedButton {
-	padding: 8px 18px;
-	/* Tăng kích thước của nút */
+	padding: 6px 15px;
 	font-size: 18px;
-	/* Cỡ chữ lớn hơn */
 	color: #333;
 	background-color: #eaeaea;
 	border: none;
-	border-radius: 20px;
-	/* Bo tròn các góc */
+	border-radius: 10px;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 }
@@ -66,11 +86,9 @@
 /* CSS cho hiển thị tốc độ hiện tại */
 #currentSpeed {
 	font-size: 18px;
-	/* Cỡ chữ lớn hơn */
 	color: #333;
 	font-weight: bold;
 }
-
 
 
 /* Hiển thị loading khi ấn phát */
@@ -83,7 +101,6 @@
 	height: 50px;
 	animation: spin 2s linear infinite;
 	display: none;
-	/* Mặc định ẩn biểu tượng loading */
 }
 
 @keyframes spin {

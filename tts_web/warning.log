@@ -2158,3 +2158,39 @@ Not Found: /robots.txt
 Not Found: /cgi-bin/luci/;stok=/locale
 Not Found: /cgi-bin/orospucoc.cgi
 Not Found: /WebInterface/
+Not Found: /favicon.ico
+Not Found: /cgi-bin/luci/;stok=/locale
+Not Found: /google.com:443
+Not Found: /boaform/admin/formLogin
+Not Found: /Autodiscover/Autodiscover.xml
+Not Found: /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /favicon.ico
+Forbidden (CSRF cookie not set.): /
+Forbidden (CSRF cookie not set.): /
+Not Found: /WuEL
+Not Found: /stager64
+Not Found: /a
+Not Found: /download/file.ext
+Not Found: /SiteLoader
+Not Found: /mPlayer
+Forbidden (CSRF cookie not set.): /
+Not Found: /WebInterface/
+Not Found: /.env
+Not Found: /google.com:443
+Not Found: /cgi-bin/luci/;stok=/locale
+Not Found: /actuator/health
+Not Found: /favicon.ico
+Not Found: /google.com:443
+Not Found: /cgi-bin/luci/;stok=/locale
+Not Found: /google.com:443
+Not Found: /.env
+Not Found: /favicon.ico
+Not Found: /geoserver/web/
+Not Found: /cgi-bin/luci/;stok=/locale
+Bad Request: /api/tts_api/gettext/
+Bad Request: /api/tts_api/gettext/
+Bad Request: /api/tts_api/gettext/
+Not Found: /cgi-bin/luci/;stok=/locale
+Bad Request: /api/tts_api/gettext/
+Not Found: /nghetruyen/undefined

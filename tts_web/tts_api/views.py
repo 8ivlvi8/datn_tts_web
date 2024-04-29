@@ -9,10 +9,17 @@ import asyncio
 def get_text_by_link_and_element(link, element):
     response = requests.get(link)
     soup = BeautifulSoup(response.text, 'html.parser')
+    # Lấy url chapter trước và sau
+    prev_chap_url = soup.find('a', {'id': 'prev_chap'}).get('href')
+    next_chap_url = soup.find('a', {'id': 'next_chap'}).get('href')
+    chapter_title = soup.find('a', {'class': 'chapter-title'}).text
+    truyen_title = soup.find('a', {'class': 'truyen-title'}).text
+    # Lấy nội dung chapter hiện tại
     chapter_html = soup.find('div', {'class': element}).prettify()
     chapter_soup = BeautifulSoup(chapter_html, 'html.parser')
     # Loại bỏ các thẻ HTML và chỉ giữ lại nội dung văn bản
     text = chapter_soup.get_text(separator="\n", strip=True)
+    # Tách văn bản thành các đoạn văn
     doan_van = text.split('\n')
     doan_van_da_tach = []
     temp = ""
@@ -23,7 +30,15 @@ def get_text_by_link_and_element(link, element):
             temp = ""
     if temp != "":
         doan_van_da_tach.append(temp)
-    return doan_van_da_tach
+    # Khởi tạo dictionary để chứa kết quả
+    result = {}
+    result['prev_chap_url'] = prev_chap_url
+    result['next_chap_url'] = next_chap_url
+    result['content'] = doan_van_da_tach
+    result['chapter_title'] = chapter_title
+    result['truyen_title'] = truyen_title
+    # Trả về kết quả dưới dạng JSON
+    return result
 
 
 class TTS_API_Get_Text(APIView):
@@ -32,8 +47,8 @@ class TTS_API_Get_Text(APIView):
         element = request.query_params.get(
             'element') or request.data.get('element')
         try:
-            extracted_text = get_text_by_link_and_element(url, element)
-            return JsonResponse({'extracted_text': extracted_text}, status=200)
+            result = get_text_by_link_and_element(url, element)
+            return JsonResponse({'extracted_text': result['content'], 'prev_chap_url': result['prev_chap_url'], 'next_chap_url': result['next_chap_url'], 'chapter_title': result['chapter_title'], 'truyen_title': result['truyen_title']}, status=200)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
 
@@ -65,6 +80,7 @@ async def generate_audio_stream(text, voice):
             yield chunk["data"]
         # elif chunk["type"] == "WordBoundary":
         #     print(f"WordBoundary: {chunk}")
+
 
 class TTS_API_Get_Audio_Stream(APIView):
     def post(self, request, format=None):

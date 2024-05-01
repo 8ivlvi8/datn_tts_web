@@ -3,24 +3,44 @@
 }
 
 iframe {
-	width: 97vw;
-	height: 83vh;
-	padding-top: 10px;
+	width: 100%;
+	height: 74vh;
+	padding-top: 1px;
+}
+#autoPlay{
+	margin-top: 3px;
+	width: 25px;
+	height: 25px;
 }
 
 #chapterInfo {
 	margin: 0px 10px;
-	min-width: 400px;
+	justify-content: center;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
 }
 
-#menu {
-	margin: 0px;
-	padding: 0px 10px;
-	width: 97vw;
+.container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.section {
+	flex: 1;
+	min-width: 50%;
+	margin-bottom: 10px;
+}
+
+/* Điều chỉnh layout cho màn hình nhỏ hơn 768px (điện thoại) */
+@media (max-width: 768px) {
+	.section {
+		min-width: 100%;
+	}
 }
 
 #urlInput {
-	width: 80%;
+	width: 350px;
 }
 
 #playbackSpeedLabel {
@@ -35,7 +55,7 @@ iframe {
 #next_chapter {
 	background-color: #4CAF50;
 	color: white;
-	padding: 10px 20px;
+	padding: 10px 10px;
 	font-size: 18px;
 	border: none;
 	border-radius: 5px;
@@ -55,8 +75,12 @@ iframe {
 	border: 1px solid #ccc;
 	border-radius: 6px;
 	padding: 3px;
-	width: 130px;
+	width: 100%;
 	background-color: #f9f9f9;
+	flex-wrap: nowrap;
+	margin-bottom: 5px;
+	justify-content: space-around;
+
 }
 
 #playbackSpeedControl>div {
@@ -68,8 +92,9 @@ iframe {
 /* CSS cho nút giảm tốc độ và tăng tốc độ */
 #decreaseSpeedButton,
 #increaseSpeedButton {
-	padding: 6px 15px;
-	font-size: 18px;
+	padding: 0px 10px 5px 10px;
+	font-size: 25px;
+	font-weight: bold;
 	color: #333;
 	background-color: #eaeaea;
 	border: none;
@@ -88,6 +113,7 @@ iframe {
 	font-size: 18px;
 	color: #333;
 	font-weight: bold;
+	margin: 2px 20px;
 }
 
 

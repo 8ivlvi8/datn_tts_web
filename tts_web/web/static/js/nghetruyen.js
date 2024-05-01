@@ -15,16 +15,21 @@ function getCookie(name) {
 }
 // Lấy đối tượng button Phát
 const playAudioButton = document.getElementById('playAudioButton');
+// Lấy đối tượng prev_chapter
+const prev_chapterButton = document.getElementById('prev_chapter');
+// Lấy đối tượng next_chapter
+const next_chapterButton = document.getElementById('next_chapter');
 // Lấy đối tượng tốc độ phát 
 var currentSpeedDisplay = document.getElementById("currentSpeed");
-// Lấy đối tượng audio
-var audio = document.getElementById("audioPlayer");
+// Lấy đối tượng audioPlayer
+var audioPlayer = document.getElementById("audioPlayer");
 // Lấy đối tượng tên truyện
 var truyen_title = document.getElementById("truyen_title");
 // Lấy đối tượng tên chapter
 var chapter_title = document.getElementById("chapter_title");
 // Lấy đối tượng iframe
 var iframe = document.getElementById("iframeTruyenfull");
+
 // Lấy đối tượng input
 var urlInput = document.getElementById("urlInput");
 // Kiểm tra xem đã có url trong localStorage chưa
@@ -34,28 +39,45 @@ if (storedUrl)
     urlInput.value = storedUrl;
 else
     urlInput.value = "https://truyenfull.vn/";
-// Lắng nghe sự kiện input thay đổi
-urlInput.addEventListener("input", function () {
-    // Lưu giá trị của input vào localStorage khi có sự thay đổi
+function updateStoredUrl() {
     localStorage.setItem("savedUrl", urlInput.value);
-});
-// Đặt tốc độ phát mặc định của audio khi trang được tải
-audio.playbackRate = 1.7;
-currentSpeedDisplay.textContent = audio.playbackRate.toFixed(1); // Hiển thị tốc độ phát hiện tại
+}
+// Lắng nghe sự kiện input thay đổi
+urlInput.addEventListener("input", updateStoredUrl);
+
+// Lấy đối tượng tự động phát
+var autoPlay = document.getElementById("autoPlay");
+// Kiểm tra xem đã có autoPlay trong localStorage chưa
+var autoPlayValue = localStorage.getItem("autoPlay");
+// Nếu có dữ liệu trong localStorage, cập nhật checkbox
+if (autoPlayValue !== null)
+    autoPlay.checked = (autoPlayValue === "true");
+else
+    autoPlay.checked = false;
+function updateAutoPlay() {
+    // Lưu trạng thái của checkbox vào localStorage
+    localStorage.setItem("autoPlay", autoPlay.checked);
+}
+// Lắng nghe sự kiện change thay đổi
+autoPlay.addEventListener("change", updateAutoPlay);
+
+// Đặt tốc độ phát mặc định của audioPlayer khi trang được tải
+audioPlayer.playbackRate = 1.6;
+currentSpeedDisplay.textContent = audioPlayer.playbackRate.toFixed(1); // Hiển thị tốc độ phát hiện tại
 // Function để giảm tốc độ phát
-document.getElementById("decreaseSpeedButton").addEventListener("click", function () {
-    if (audio.playbackRate > 1) {
-        audio.playbackRate -= 0.1;
-        currentSpeedDisplay.textContent = audio.playbackRate.toFixed(1);
+function decreaseSpeed() {
+    if (audioPlayer.playbackRate > 1) {
+        audioPlayer.playbackRate -= 0.1;
+        currentSpeedDisplay.textContent = audioPlayer.playbackRate.toFixed(1);
     }
-});
+}
 // Function để tăng tốc độ phát
-document.getElementById("increaseSpeedButton").addEventListener("click", function () {
-    if (audio.playbackRate < 2.5) {
-        audio.playbackRate += 0.1;
-        currentSpeedDisplay.textContent = audio.playbackRate.toFixed(1);
+function increaseSpeed() {
+    if (audioPlayer.playbackRate < 2.5) {
+        audioPlayer.playbackRate += 0.1;
+        currentSpeedDisplay.textContent = audioPlayer.playbackRate.toFixed(1);
     }
-});
+}
 // Hàm để hiển thị biểu tượng loading
 function showLoader() {
     playAudioButton.style.display = 'none';
@@ -75,13 +97,16 @@ let next_chap_url = ''; // Biến lưu trữ URL của chương sau
 
 // Hàm để fetch văn bản từ API
 function fetchText() {
+    audioPlayer.pause();
     updateIframeSrc();
-    const url = 'http://letam.myftp.org:80/api/tts_api/gettext/';
+    const url = 'http://letam.myftp.org:8686/api/tts_api/gettext/';
     const requestBody = {
         url: urlInput.value,
         element: 'chapter-c'
     };
     showLoader();
+    prev_chapterButton.setAttribute('disabled', true);
+    next_chapterButton.setAttribute('disabled', true);
     // Lấy CSRF token từ cookie
     const csrftoken = getCookie('csrftoken');
     fetch(url, {
@@ -103,12 +128,18 @@ function fetchText() {
             prev_chap_url = responseData.prev_chap_url;
             next_chap_url = responseData.next_chap_url;
             chapter_title.innerText = responseData.chapter_title;
-            truyen_title.innerText = responseData.truyen_title;
+            truyen_title.innerText = "Tên truyện: " + responseData.truyen_title;
+            prev_chapterButton.removeAttribute('disabled');
+            next_chapterButton.removeAttribute('disabled');
             hideLoader();
+            if (autoPlay.checked)
+                playAudio();
         })
         .catch(error => {
             console.error('Error fetching text:', error);
             hideLoader(); // Ẩn biểu tượng loading trong trường hợp lỗi
+            chapter_title.innerText = "";
+            truyen_title.innerText = "Vui lòng dán link truyện vào ô bên dưới!";
         });
 }
 // Hàm để phát audio từ API
@@ -118,10 +149,10 @@ function playAudio() {
         return;
     }
     showLoader();
-    const url = 'http://letam.myftp.org:80/api/tts_api/getaudiostream/';
+    const url = 'http://letam.myftp.org:8686/api/tts_api/getaudiostream/';
     const csrftoken = getCookie('csrftoken'); // Lấy CSRF token từ cookie
     // Mảng để lưu trữ tất cả các Promise fetch audio
-    const audioPromises = [];
+    audioPromises = [];
     // Duyệt qua các đoạn văn bản từ currentIndex đến cuối văn bản
     for (let i = currentIndex; i < textData.length; i++) {
         // Thêm Promise của mỗi đoạn văn bản vào mảng audioPromises
@@ -129,9 +160,8 @@ function playAudio() {
     }
     // Khởi tạo một hàm async để xử lý việc fetch và phát audio
     async function playAudioSequentially(audioPromises) {
-        const audioPlayer = document.getElementById('audioPlayer');
         for (let i = 0; i < audioPromises.length; i++) {
-            const audioURL = await audioPromises[i]; // Chờ cho đến khi Promise hoàn thành
+            audioURL = await audioPromises[i]; // Chờ cho đến khi Promise hoàn thành
             // Phát audio của đoạn hiện tại
             audioPlayer.src = audioURL;
             audioPlayer.playbackRate = currentSpeedDisplay.textContent;
@@ -144,7 +174,14 @@ function playAudio() {
     playAudioSequentially(audioPromises).catch(error => {
         console.error('Error playing audio:', error);
         hideLoader(); // Ẩn biểu tượng loading trong trường hợp lỗi
-    }).finally(hideLoader);
+    }).finally(function () {
+        hideLoader();
+        urlInput.value = next_chap_url;
+        updateIframeSrc();
+        updateStoredUrl();
+        if (autoPlay.checked)
+            location.reload();
+    });
 }
 // Hàm để fetch audio từ API
 function fetchAudio(url, csrftoken, text) {
@@ -181,22 +218,25 @@ function updateIframeSrc() {
     var newUrl = urlInput.value;
     iframe.src = newUrl;
 }
-function updatePrevChapUrl() {
-    if (prev_chap_url.includes("truyenfull")) {
-        urlInput.value = prev_chap_url
-        fetchText();
-    } else
-        alert("Bạn đang ở chương đầu tiên")
+function updatePrevNextChapUrl(chap) {
+    if (chap == 'prev')
+        if (prev_chap_url.includes("truyenfull")) {
+            audioPlayer.pause();
+            urlInput.value = prev_chap_url
+        } else
+            alert("Bạn đang ở chương đầu tiên")
+    if (chap == 'next')
+        if (next_chap_url.includes("truyenfull")) {
+            audioPlayer.pause();
+            urlInput.value = next_chap_url
+        }
+        else
+            alert("Bạn đang ở chương cuối cùng")
+    updateStoredUrl();
+    location.reload();
 }
-function updateNextChapUrl() {
-    if (next_chap_url.includes("truyenfull")) {
-        urlInput.value = next_chap_url
-        fetchText();
-    }
-    else
-        alert("Bạn đang ở chương cuối cùng")
-}
-
 
 urlInput.addEventListener("input", fetchText);
-window.onload = fetchText;
+window.onload = function () {
+    fetchText();
+};

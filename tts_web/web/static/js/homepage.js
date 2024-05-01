@@ -17,7 +17,7 @@ function getCookie(name) {
 
 
 function fetchAudio() {
-    const url = 'http://letam.myftp.org:80/api/tts_api/getaudiostream/';
+    const url = 'http://letam.myftp.org:8686/api/tts_api/getaudiostream/';
     const requestBody = {
         text: document.getElementById('inputtext').value,
         voice: 'vi-VN-HoaiMyNeural'

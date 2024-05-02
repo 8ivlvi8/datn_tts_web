@@ -1,9 +1,10 @@
-from django.http import JsonResponse, StreamingHttpResponse
+from django.http import JsonResponse, StreamingHttpResponse, HttpResponse
 from rest_framework.views import APIView
-import requests
+import requests, re
 from bs4 import BeautifulSoup
 import edge_tts
 import asyncio
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 
 def get_text_by_link_and_element(link, element):
@@ -96,3 +97,36 @@ class TTS_API_Get_Audio_Stream(APIView):
         response = StreamingHttpResponse(generate_audio_stream(
             text, voice), content_type='audio/mpeg')
         return response
+
+
+class TTS_APT_Get_html(APIView):
+    @xframe_options_exempt
+    def get(self, request, format=None):
+        # Lấy nội dung HTML từ URL
+        response = requests.get(request.query_params.get('url') or request.data.get('url'))
+        html_content = response.text
+        soup = BeautifulSoup(html_content, 'html.parser')
+        # Tạo một thẻ <script> mới
+        new_script_tag = soup.new_tag("script")
+        new_script_tag.string = "var anchorLinks = document.querySelectorAll('a');anchorLinks.forEach(function(anchor) {    anchor.addEventListener('click', function(event) {        event.preventDefault();         yourFunction(anchor.getAttribute('href'));    });});function yourFunction(href) {    console.log('Đã click vào link với href là: ' + href);}    var adsElements = document.querySelectorAll('.ads-iads'); adsElements.forEach(function(element) {element.remove();});"
+
+#  var adsElements = document.querySelectorAll('.ads-iads'); adsElements.forEach(function(element) {element.remove();});
+        # Tìm thẻ cuối cùng của <body> và thêm script vào sau đó
+        body_tag = soup.find('body')
+        body_tag.append(new_script_tag)
+        delete_tag = { 'hot-select', 'banner_image_home', 'is_show_slide', 'ads-300x250-detail-truyen-top'}
+        # Tìm và xóa phần tử có id là "hot-select"
+        for tag in delete_tag:
+            select_element = soup.find(id=tag)
+            if select_element:
+                select_element.decompose()
+        iads_elements = soup.find_all(class_='iads-all-content')
+        for iads_element in iads_elements:
+            print(iads_element)
+            iads_element.decompose()
+
+
+        # Chuyển đổi lại thành chuỗi HTML với mã script được thêm vào
+        html_with_script = soup.prettify().encode('utf-8')
+        # Trả về kết quả dưới dạng HttpResponse
+        return HttpResponse(html_with_script, status=200)

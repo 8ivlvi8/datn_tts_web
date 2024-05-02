@@ -239,4 +239,8 @@ function updatePrevNextChapUrl(chap) {
 urlInput.addEventListener("input", fetchText);
 window.onload = function () {
     fetchText();
+    iframe.addEventListener('load', () => {
+        console.log('Current URL from iframe:', iframe.contentWindow.location.href);
+    });
 };
+

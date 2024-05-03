@@ -1,11 +1,13 @@
 from django.http import JsonResponse, StreamingHttpResponse, HttpResponse
 from rest_framework.views import APIView
 import requests
-import re
+from web.templates import *
+from django.shortcuts import render
 from bs4 import BeautifulSoup
 import edge_tts
 import asyncio
 from django.views.decorators.clickjacking import xframe_options_exempt
+from django.template import loader
 
 
 def get_text_by_link_and_element(link, element):
@@ -109,5 +111,10 @@ class TTS_API_Get_List_Chapter(APIView):
         html_content = response.text.replace('chapter_jump', '')
         list_chapter = BeautifulSoup(
             html_content, 'html.parser').prettify().encode('utf-8')
-        print(list_chapter)
         return HttpResponse(list_chapter, status=200)
+
+
+class TTS_API_Get_Audio_Player(APIView):
+    def get(self, request, format=None):
+        return HttpResponse(loader.get_template('nghetruyen.html').render(), status=200)
+

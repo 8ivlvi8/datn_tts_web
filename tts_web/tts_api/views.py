@@ -1,6 +1,7 @@
 from django.http import JsonResponse, StreamingHttpResponse, HttpResponse
 from rest_framework.views import APIView
-import requests, re
+import requests
+import re
 from bs4 import BeautifulSoup
 import edge_tts
 import asyncio
@@ -99,3 +100,14 @@ class TTS_API_Get_Audio_Stream(APIView):
         return response
 
 
+class TTS_API_Get_List_Chapter(APIView):
+    def get(self, request, format=None):
+        truyen_id = request.query_params.get(
+            'truyen_id') or request.data.get('truyen_id')
+        response = requests.get(
+            "https://truyenfull.vn/ajax.php", params={'type': 'chapter_option', 'data': truyen_id})
+        html_content = response.text.replace('chapter_jump', '')
+        list_chapter = BeautifulSoup(
+            html_content, 'html.parser').prettify().encode('utf-8')
+        print(list_chapter)
+        return HttpResponse(list_chapter, status=200)

@@ -16,6 +16,10 @@ function removeAds() {
 }
 removeAds();
 
+row_top_nav = document.querySelector('.row.top-nav');
+if (row_top_nav)
+    row_top_nav.remove();
+
 // Xử lý chọn chương
 list_chapter = document.querySelector('.btn.btn-success.btn-chapter-nav.chapter_jump');
 if (list_chapter) {
@@ -42,27 +46,30 @@ anchorLinks.forEach(function (anchor) {
 });
 function direct(href) {
     console.log('Đã click vào link với href là: ' + href);
-    if (href.includes("https://truyenfull.vn")) {
-        let url = prefix + href
-        window.location.href = url;
-    }
+    if (href.startsWith("https://truyenfull.vn"))
+        window.location.href = prefix + href;
+    else 
+        window.location.href = href;
 }
 
 // Xử lý các link chuyển chương
 var content = document.getElementById('chapter-c');
 if (content) {
+    console.log("đang ở chap truyện");
     var prev_chap_element = document.getElementById('prev_chap');
     var next_chap_element = document.getElementById('next_chap');
-    var prev_chap_href = prefix + prev_chap_element.getAttribute('href');
-    var next_chap_href = prefix + next_chap_element.getAttribute('href');
-    console.log(prev_chap_href);
-    console.log(next_chap_href);
-    prev_chap_element.setAttribute('href', prev_chap_href);
-    next_chap_element.setAttribute('href', next_chap_href);
-}   
+    prev_chap_element.setAttribute('href', prefix + prev_chap_element.getAttribute('href'));
+    next_chap_element.setAttribute('href', prefix + next_chap_element.getAttribute('href'));
+    $.get("/api/tts_api/getaudioplayer/", function (data) {
+        $(".chapter-start").replaceWith(data);
+    });
+
+}
 
 // Xóa element thứ 4 (web truyện tranh)
 var dropdownItems = document.querySelectorAll('.control.nav.navbar-nav > .dropdown');
-if (dropdownItems.length == 5) {
+if (dropdownItems.length == 5)
     dropdownItems[3].remove();
-}
+
+
+    

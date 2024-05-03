@@ -2720,3 +2720,406 @@ Not Found: /ajax.php
 Not Found: /ajax.php
 Not Found: /ajax.php
 Not Found: /ajax.php
+Not Found: /tts_web/tts_api/static/script_gethtml.js
+Not Found: /ajax.php
+Not Found: /tts_api/static/script_gethtml.js
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Bad Request: /api/tts_api/gettext/
+Bad Request: /api/tts_api/gettext/
+Bad Request: /api/tts_api/gettext/
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Internal Server Error: /api/tts_api/gethtml/
+Traceback (most recent call last):
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\clickjacking.py", line 58, in wrapper_view
+    resp = view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\DATN\datn_tts_web\tts_web\tts_api\views.py", line 106, in get
+    response = requests.get(request.query_params.get('url') or request.data.get('url'))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 697, in send
+    adapter = self.get_adapter(url=request.url)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 794, in get_adapter
+    raise InvalidSchema(f"No connection adapters were found for {url!r}")
+requests.exceptions.InvalidSchema: No connection adapters were found for 'javascript:void(0)'
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /images/2024-0308.gif
+Not Found: /ajax.php
+Not Found: /images/2024-0308.gif
+Not Found: /ajax.php
+Not Found: /images/2024-0308.gif
+Not Found: /ajax.php
+Not Found: /images/2024-0308.gif
+Not Found: /ajax.php
+Not Found: /ngheTruyen/
+Not Found: /favicon.ico
+Not Found: /api/ngheTruyen/
+Not Found: /api/ngheTruyen/
+Not Found: /favicon.ico
+Not Found: /images/2024-0308.gif
+Not Found: /images/2024-0308.gif
+Not Found: /ajax.php
+Not Found: /images/2024-0308.gif
+Not Found: /images/2024-0308.gif
+Not Found: /ajax.php
+Not Found: /images/2024-0308.gif
+Not Found: /images/2024-0308.gif
+Not Found: /ajax.php
+Not Found: /images/2024-0308.gif
+Not Found: /images/2024-0308.gif
+Not Found: /ajax.php
+Not Found: /images/2024-0308.gif
+Not Found: /images/2024-0308.gif
+Not Found: /ajax.php
+Not Found: /images/2024-0308.gif
+Not Found: /images/2024-0308.gif
+Not Found: /ajax.php
+Not Found: /images/2024-0308.gif
+Not Found: /images/2024-0308.gif
+Not Found: /ajax.php
+Not Found: /api/tts_api/gethtml/
+Not Found: /api/tts_api/gethtml/
+Not Found: /nghetruyen/
+Not Found: /favicon.ico
+Not Found: /nghetruyen/
+Not Found: /favicon.ico
+Not Found: /nghetruyen/
+Not Found: /nghetruyen/
+Internal Server Error: /nghetruyen/
+Traceback (most recent call last):
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\clickjacking.py", line 58, in wrapper_view
+    resp = view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\DATN\datn_tts_web\tts_web\web\views.py", line 49, in get
+    response = requests.get(request.query_params.get('url') or request.data.get('url'))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 486, in prepare_request
+    p.prepare(
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\models.py", line 368, in prepare
+    self.prepare_url(url, params)
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\models.py", line 439, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL 'None': No scheme supplied. Perhaps you meant https://None?
+Not Found: /favicon.ico
+Internal Server Error: /nghetruyen/
+Traceback (most recent call last):
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\clickjacking.py", line 58, in wrapper_view
+    resp = view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\DATN\datn_tts_web\tts_web\web\views.py", line 52, in get
+    response = requests.get()
+               ^^^^^^^^^^^^^^
+TypeError: get() missing 1 required positional argument: 'url'
+Not Found: /favicon.ico
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /api/tts_api/gethtml/
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Not Found: /ajax.php
+Internal Server Error: /nghetruyen/
+Traceback (most recent call last):
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\clickjacking.py", line 58, in wrapper_view
+    resp = view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\DATN\datn_tts_web\tts_web\web\views.py", line 48, in get
+    response = requests.get(request.query_params.get('url') or request.data.get('url'))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 486, in prepare_request
+    p.prepare(
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\models.py", line 368, in prepare
+    self.prepare_url(url, params)
+  File "C:\Users\letam\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\models.py", line 439, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL 'None': No scheme supplied. Perhaps you meant https://None?
+Not Found: /favicon.ico

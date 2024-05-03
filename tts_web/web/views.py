@@ -45,7 +45,10 @@ class TTS_APT_Get_html(APIView):
     @xframe_options_exempt
     def get(self, request, format=None):
         # Lấy nội dung HTML từ URL
-        response = requests.get(request.query_params.get('url') or request.data.get('url') or 'https://truyenfull.vn/')
+        url = request.query_params.get('url') or request.data.get('url') or 'https://truyenfull.vn/'
+        if not (url.startswith('https://truyenfull.vn/')):
+            return HttpResponse(loader.get_template('404.html').render(), status=404)
+        response = requests.get(url)
         html_content = response.text
         soup = BeautifulSoup(html_content, 'html.parser')
         # Tạo một thẻ <script> mới

@@ -16,6 +16,12 @@ function removeAds() {
 }
 removeAds();
 
+// Xử lý tìm kiếm truyện
+var formElement = document.querySelector('.navbar-form.navbar-right');
+formElement.action = "";
+
+
+// Xóa Ngày Tháng Năm
 row_top_nav = document.querySelector('.row.top-nav');
 if (row_top_nav)
     row_top_nav.remove();
@@ -32,6 +38,23 @@ function get_list_chapter() {
     var truyen_id = $("#truyen-id").val();
     $.get("/api/tts_api/getlistchapters/", { truyen_id: truyen_id }, function (data) {
         $(".btn.btn-success.btn-chapter-nav.list_chapter").replaceWith(data);
+        // Lấy select sửa class tránh xung đột
+        var selectElement = document.querySelector('.btn.btn-success.btn-chapter-nav.form-control');
+        selectElement.classList.remove('form-control');
+        selectElement.classList.add('list_chapter_select');
+
+        // Thêm sự kiện onchange khi chọn chương
+        selectElement.addEventListener('change', function () {
+            // Lấy giá trị của option đã chọn
+            var selectedOption = this.options[this.selectedIndex];
+            var chuongValue = selectedOption.value;
+            // Lấy URL hiện tại
+            var currentUrl = window.location.href;
+            // Tạo URL mới bằng cách thay thế chương trong URL hiện tại bằng chương đã chọn
+            var newUrl = currentUrl.replace(/chuong-\d+/, chuongValue);
+            // Chuyển đến trang mới
+            window.location.href = newUrl;
+        });
     });
 }
 
@@ -61,7 +84,7 @@ function updatecurrentSpeed() {
     localStorage.setItem("currentSpeed", currentSpeedDisplay.textContent);
 }
 
-
+// Các biến dùng khi trong chương truyện
 var playAudioButton = null;
 var prev_chapterButton = null;
 var next_chapterButton = null;
@@ -111,7 +134,7 @@ if (content) {
             audioPlayer.playbackRate = 1.6;
             currentSpeedDisplay.textContent = audioPlayer.playbackRate.toFixed(1); // Hiển thị tốc độ phát hiện tại
             localStorage.setItem("currentSpeed", "1.6");
-        } else{
+        } else {
             currentSpeedDisplay.textContent = currentSpeedValue;
             audioPlayer.playbackRate = currentSpeedValue;
         }

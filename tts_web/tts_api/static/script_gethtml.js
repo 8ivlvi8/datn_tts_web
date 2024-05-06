@@ -145,6 +145,7 @@ if (content) {
 
         // Lấy nội dung của phần tử có id là "chapter-c"
         let paragraphs = content.textContent.split('\n');
+
         // Loại bỏ các khoảng trắng dư thừa ở đầu và cuối mỗi đoạn văn bản và loại bỏ các đoạn văn bản rỗng
         textData = paragraphs.map(function (paragraph) {
             return paragraph.trim();
@@ -152,9 +153,34 @@ if (content) {
             return paragraph !== '';
         });
 
+        // Thêm tiêu đề chương vào đầu mảng
         let title = document.querySelector('.chapter-title').getAttribute('title');
-        console.log(title);
         textData.unshift(title);
+
+        // Tạo một mảng mới để chứa các đoạn văn với số lượng câu tăng dần
+        let processedTextData = [];
+        let currentParagraph = '';
+        let length = 0; // Số lượng câu ban đầu là 1
+        // Lặp qua từng câu trong textData
+        textData.forEach(function (sentence) {
+            // Thêm câu vào đoạn hiện tại
+            currentParagraph += sentence + '\n';
+
+            // Nếu số câu trong đoạn hiện tại đạt đến số lượng câu mong muốn, thêm đoạn vào mảng và bắt đầu đoạn mới
+            if (currentParagraph.length > length) {
+                processedTextData.push(currentParagraph.trim());
+                currentParagraph = '';
+                length += 70;
+            }
+        });
+
+        // Nếu còn đoạn cuối cùng chưa được thêm vào mảng processedTextData, thêm nó vào
+        if (currentParagraph !== '') {
+            processedTextData.push(currentParagraph.trim());
+        }
+        console.log(processedTextData);
+
+        textData = processedTextData;
 
         // // Hiển thị mảng các đoạn văn bản đã được làm sạch trong console
         // console.log(textData);

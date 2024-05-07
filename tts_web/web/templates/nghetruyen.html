@@ -19,8 +19,7 @@
 
 	#decreaseSpeedButton,
 	#increaseSpeedButton,
-	#playAudioButton,
-	#pauseAudioButton {
+	#playAudioButton {
 		background-color: #4CAF50;
 		color: white;
 		padding: 10px 15px;
@@ -29,6 +28,7 @@
 		border-radius: 5px;
 		cursor: pointer;
 		font-weight: bold;
+		margin: 1px 10px;
 	}
 
 	#autoPlay {
@@ -80,12 +80,13 @@
 		</div>
 		<button id="increaseSpeedButton" onclick="increaseSpeed()">&gt;&gt;</button>
 		<button id="playAudioButton" onclick="playAudio()">&nbsp;Phát&nbsp;</button>
-		<button id="pauseAudioButton" onclick="pauseAudio()">&nbsp;Tạm dừng&nbsp;</button>
 		<div class="loader" id="loader"></div>
 	</div>
-	<div id="audioPlayerControl"> 
+	<br>
+	<div id="audioPlayerControl">
 		<audio controls id="audioPlayer" autoplay></audio>
 	</div>
+	<br>
 	<div id="autoPlayControl">
 		<span style="margin-right: 5px;">Tự động phát chương tiếp theo&nbsp;</span>
 		<input type="checkbox" id="autoPlay" checked>

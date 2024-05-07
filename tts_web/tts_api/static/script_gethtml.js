@@ -77,8 +77,13 @@ function direct(href) {
 
 // Xóa element thứ 4 (web truyện tranh)
 var dropdownItems = document.querySelectorAll('.control.nav.navbar-nav > .dropdown');
-if (dropdownItems.length == 5)
-    dropdownItems[3].remove();
+if (dropdownItems.length == 5) {
+    const dropdownItem = dropdownItems[3];
+    dropdownItem.querySelector('a').setAttribute('href', '/tts/');
+    dropdownItem.querySelector('a').setAttribute('title', 'Text to speech');
+    dropdownItem.querySelector('a').innerHTML = '<span class="glyphicon glyphicon-book" style="margin-right: 3px;"></span>Text to speech'
+}
+
 function updatecurrentSpeed() {
     // Lưu trạng thái của checkbox vào localStorage
     localStorage.setItem("currentSpeed", currentSpeedDisplay.textContent);
@@ -186,7 +191,7 @@ if (content) {
         // console.log(textData);
 
         if (autoPlayValue === "true")
-            playAudio();
+            playAudioButton.click();
     });
 }
 

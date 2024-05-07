@@ -28,5 +28,4 @@ urlpatterns = [
     path('', include('web.urls')),
     path('api/', include('tts_api.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-
 ]

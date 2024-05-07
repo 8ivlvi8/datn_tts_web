@@ -59,7 +59,7 @@ function get_list_chapter() {
 }
 
 // Xử lý khi click vào các thẻ a
-var prefix = "http://letam.myftp.org:8686/nghetruyen/?url=";
+var prefix = "/nghetruyen/?url=";
 var anchorLinks = document.querySelectorAll('a');
 anchorLinks.forEach(function (anchor) {
     anchor.addEventListener('click', function (event) {
@@ -233,7 +233,7 @@ function playAudio() {
         return;
     }
     showLoader();
-    const url = 'http://letam.myftp.org:8686/api/tts_api/getaudiostream/';
+    const url = '/api/tts_api/getaudiostream/';
     // Mảng để lưu trữ tất cả các Promise fetch audio
     audioPromises = [];
     // Duyệt qua các đoạn văn bản từ currentIndex đến cuối văn bản

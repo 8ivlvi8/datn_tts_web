@@ -34,18 +34,7 @@ def tts(request):
 
 
 class TTS_APT_Get_html(APIView):
-    @xframe_options_exempt
-    def get(self, request, format=None):
-        # Lấy nội dung HTML từ URL
-        url = request.query_params.get('url') or request.data.get(
-            'url') or 'https://truyenfull.vn/'
-        if not (url.startswith('https://truyenfull.vn')):
-            return HttpResponse(loader.get_template('404.html').render(), status=404)
-        tukhoa = request.query_params.get('tukhoa') or request.data.get(
-            'tukhoa')
-        if tukhoa:
-            url = (f"https://truyenfull.vn/tim-kiem/?tukhoa=" +
-                   str(tukhoa).strip())
+    def get_html(url):
         response = requests.get(url)
         html_content = response.text
         soup = BeautifulSoup(html_content, 'html.parser')
@@ -58,5 +47,23 @@ class TTS_APT_Get_html(APIView):
 
         # Chuyển đổi lại thành chuỗi HTML với mã script được thêm vào
         html_with_script = soup.prettify().encode('utf-8')
+        return html_with_script
+
+    @xframe_options_exempt
+    def get(self, request, format=None):
+        # Lấy nội dung HTML từ URL
+        url = request.query_params.get('url') or request.data.get(
+            'url') or 'https://truyenfull.vn/'
+        if not (url.startswith('https://truyenfull.vn')):
+            return HttpResponse(loader.get_template('404.html').render(), status=404)
+        tukhoa = request.query_params.get('tukhoa') or request.data.get(
+            'tukhoa')
+        if tukhoa:
+            url = (f"https://truyenfull.vn/tim-kiem/?tukhoa=" +
+                   str(tukhoa).strip())
+        try:
+            result = TTS_APT_Get_html.get_html(url)
+        except:
+            result = TTS_APT_Get_html.get_html("https://truyenfull.vn/danh-sach/truyen-hot/")
         # Trả về kết quả dưới dạng HttpResponse
-        return HttpResponse(html_with_script, status=200)
+        return HttpResponse(result, status=200)

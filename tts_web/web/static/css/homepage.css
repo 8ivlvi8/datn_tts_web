@@ -99,3 +99,11 @@ main {
 		transform: rotate(360deg);
 	}
 }
+
+.charCount{
+	text-align: right;
+}
+
+#voice{
+	border-radius: 5px;
+}

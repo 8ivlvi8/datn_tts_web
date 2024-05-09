@@ -6,7 +6,12 @@ slider.oninput = function () {
     output.innerHTML = (this.value / 100 + 1).toFixed(2);
     rate = "+" + this.value.toString() + "%";
 }
+var inputtext = document.getElementById('inputtext');
+var charCount = document.getElementById('charCount');
 
+inputtext.addEventListener('input', function () {
+    charCount.innerHTML= inputtext.value.length;
+});
 
 function fetchAudio() {
     const url = '/api/tts_api/getaudiostream/';
@@ -62,3 +67,4 @@ function hideLoader() {
     loader.style.display = 'none';
     fetchButton.style.display = 'block';
 }
+

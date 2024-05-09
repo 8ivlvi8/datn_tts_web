@@ -6,11 +6,10 @@ Trang chủ
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}">
-<main class="container">
-	<div class="bg-light p-5 rounded">
+	<div class="p-3 mt-1">
 		<h1>Chuyển đổi văn bản tiếng Việt thành giọng nói</h1>
 		<textarea placeholder="Nhập văn bản" maxlength="4096" name="inputtext" id="inputtext"></textarea>
-		<p>Hỗ trợ tối đa 4096 ký tự.</p>
+		<p class="charCount"><span id="charCount">0</span>/4096 ký tự</p>
 		<div class="menu">
 			<div class="setVoice">
 				<span>Chọn giọng nói:</span>
@@ -30,7 +29,6 @@ Trang chủ
 		<br> 
 		<audio controls id="audioPlayer"></audio>
 	</div>
-</main>
 
 <script src="{% static 'js/homepage.js' %}"></script>
 {% endblock %}

@@ -178,7 +178,7 @@ if (content) {
         textData = processedTextData;
         // Thêm tiêu đề chương vào phần tử đầu mảng
         let title = document.querySelector('.chapter-title').getAttribute('title');
-        textData[0] = title + textData[0]
+        textData.unshift(title);
         console.log(textData);
 
         // Nếu bật tự động phát, bấm vào nút Phát
@@ -252,7 +252,7 @@ function playAudio() {
     }).finally(function () {
         hideLoader();
         if (autoPlay.checked)
-            next_chap_element[0].click();
+            next_chap_elements[0].click();
     });
 }
 // Hàm để fetch audio từ API

@@ -30,8 +30,8 @@ class TTS_API_Get_Audio(APIView):
         return JsonResponse({'message': f'Audio file {output_file} has been generated.'})
 
 
-async def generate_audio_stream(text, voice):
-    communicate = edge_tts.Communicate(text, voice, pitch="+5Hz")
+async def generate_audio_stream(text, voice, rate):
+    communicate = edge_tts.Communicate(text=text, voice=voice, pitch="+5Hz", rate=rate)
     async for chunk in communicate.stream():
         if chunk["type"] == "audio":
             yield chunk["data"]
@@ -43,8 +43,9 @@ class TTS_API_Get_Audio_Stream(APIView):
     def post(self, request, format=None):
         text = request.query_params.get('text') or request.data.get('text')
         voice = request.query_params.get('voice') or request.data.get('voice')
+        rate = request.query_params.get('rate') or request.data.get('rate') or "+0%"
         response = StreamingHttpResponse(generate_audio_stream(
-            text, voice), content_type='audio/mpeg')
+            text, voice, rate), content_type='audio/mpeg')
         return response
 
 

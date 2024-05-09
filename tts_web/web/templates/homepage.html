@@ -8,12 +8,26 @@ Trang chủ
 <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}">
 <main class="container">
 	<div class="bg-light p-5 rounded">
-		<h1>Chuyển đổi văn bản thành giọng nói</h1>
-		<textarea placeholder="Nhập văn bản cần chuyển đổi" maxlength="2048" name="inputtext" id="inputtext"></textarea>
-		<p>Hỗ trợ tối đa 2048 ký tự.</p>
+		<h1>Chuyển đổi văn bản tiếng Việt thành giọng nói</h1>
+		<textarea placeholder="Nhập văn bản" maxlength="4096" name="inputtext" id="inputtext"></textarea>
+		<p>Hỗ trợ tối đa 4096 ký tự.</p>
+		<div class="menu">
+			<div class="setVoice">
+				<span>Chọn giọng nói:</span>
+				<select name="voice" id="voice">
+					<option value="vi-VN-HoaiMyNeural" selected>Nữ - HoaiMy</option>
+					<option value="vi-VN-NamMinhNeural">Nam - NamMinh</option>
+				</select>
+			</div>
+			<div class="setSpeed">
+				Chọn tốc độ: <span id="speedValue"></span>
+				<input type="range" min="0" max="150" value="0" class="slider" id="myRange">
+			</div>
+			<br>
+		</div>
 		<button class="btn btn-lg btn-primary" id="convertBtn">Chuyển đổi</button>
-		<br>
-		<br>
+		<div class="loader" id="loader"></div>
+		<br> 
 		<audio controls id="audioPlayer"></audio>
 	</div>
 </main>

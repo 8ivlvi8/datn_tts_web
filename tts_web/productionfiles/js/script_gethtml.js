@@ -92,6 +92,8 @@ function updatecurrentSpeed() {
 // Hàm cập nhật tự động phát audio vào localStorage
 function updateAutoPlay() {
     localStorage.setItem("autoPlay", autoPlay.checked);
+    if (autoPlay.checked)
+        alertMobile();
 }
 
 // Các biến dùng khi trong chương truyện
@@ -149,6 +151,10 @@ if (content) {
         }
         currentSpeedDisplay.addEventListener("change", updatecurrentSpeed);
 
+        var ads_in_content = content.querySelectorAll('div');
+        for (let item of ads_in_content)
+            item.remove();
+        content = document.getElementById('chapter-c');
         // Lấy nội dung của chapter
         let paragraphs = content.textContent.split('\n');
 
@@ -162,7 +168,7 @@ if (content) {
         // Tạo một mảng mới để chứa các đoạn văn với độ dài tăng dần
         let processedTextData = [];
         let currentParagraph = '';
-        let length = 0;  
+        let length = 0;
         textData.forEach(function (sentence) {
             currentParagraph += sentence + '\n';
             if (currentParagraph.length > length) {
@@ -283,4 +289,60 @@ function fetchAudio(url, text) {
                 reject(error);
             });
     });
+}
+
+// Kiểm tra nếu là thiết bị di động để hiện cảnh báo
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+function alertMobile() {
+    if (isMobileDevice()) {
+        // Hiển thị cảnh báo
+        var alertBox = document.createElement('div');
+        alertBox.innerHTML = "<p style='text-align: center; font-size: 25px;'>Trên điện thoại, vì tính năng 'Tiết kiệm pin' được tự động BẬT đối với trình duyệt nên việc tự động chuyển chương có thể bị ngắt quãng. Nếu nó xảy ra, bạn vui lòng vào ứng dụng Cài đặt ở mục 'Tiết kiệm pin' và TẮT đối với trình duyệt.</p>";
+        alertBox.style.backgroundColor = 'yellow';
+        alertBox.style.position = 'fixed';
+        alertBox.style.top = '50%';
+        alertBox.style.left = '5%';
+        alertBox.style.right = '5%';
+        alertBox.style.padding = '10px';
+        alertBox.style.border = '1px solid black';
+        alertBox.style.borderRadius = '5px';
+        alertBox.style.zIndex = '9999';
+        document.body.appendChild(alertBox);
+        // Hẹn giờ ẩn cảnh báo
+        var timeout = setTimeout(function () {
+            alertBox.style.display = 'none';
+        }, 15000);
+        // Xóa hẹn giờ nếu có sự tương tác từ người dùng
+        alertBox.addEventListener('click', function () {
+            alertBox.style.display = 'none';
+            clearTimeout(timeout);
+        });
+    }
+}
+
+var lastHour = localStorage.getItem("lastHour");
+var countAlert = localStorage.getItem("countAlert");
+if (countAlert === null)
+    localStorage.setItem("countAlert", 0);
+if (lastHour === null)
+    localStorage.setItem("lastHour", currentHour);
+
+var currentDate = new Date();
+var currentHour = parseInt(currentDate.getHours());
+
+if (localStorage.getItem("autoPlay") && isMobileDevice()) {
+    countAlert = parseInt(countAlert);
+    if (parseInt(lastHour) != currentHour) {
+        localStorage.setItem("countAlert", 0);
+        localStorage.setItem("lastHour", currentHour);
+    }
+    if (countAlert < 3) {
+        alertMobile(countAlert);
+        localStorage.setItem("countAlert", countAlert + 1);
+    }
+    console.log('countAlert: ' + countAlert);
+    console.log('lastHour: ' + lastHour);
+    console.log(currentHour);
 }

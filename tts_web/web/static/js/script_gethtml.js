@@ -92,6 +92,8 @@ function updatecurrentSpeed() {
 // Hàm cập nhật tự động phát audio vào localStorage
 function updateAutoPlay() {
     localStorage.setItem("autoPlay", autoPlay.checked);
+    if (autoPlay.checked)
+        alertMobile();
 }
 
 // Các biến dùng khi trong chương truyện
@@ -149,6 +151,10 @@ if (content) {
         }
         currentSpeedDisplay.addEventListener("change", updatecurrentSpeed);
 
+        var ads_in_content = content.querySelectorAll('div');
+        for (let item of ads_in_content)
+            item.remove();
+        content = document.getElementById('chapter-c');
         // Lấy nội dung của chapter
         let paragraphs = content.textContent.split('\n');
 
@@ -324,16 +330,19 @@ if (lastHour === null)
     localStorage.setItem("lastHour", currentHour);
 
 var currentDate = new Date();
-var currentHour = currentDate.getHours();
+var currentHour = parseInt(currentDate.getHours());
 
-if (lastHour !== currentHour) {
-    if (countAlert < 3) {
-        countAlert++;
-        localStorage.setItem("countAlert", countAlert);
-        alertMobile();
-    }
-    else {
+if (localStorage.getItem("autoPlay") && isMobileDevice()) {
+    countAlert = parseInt(countAlert);
+    if (parseInt(lastHour) != currentHour) {
         localStorage.setItem("countAlert", 0);
         localStorage.setItem("lastHour", currentHour);
     }
+    if (countAlert < 3) {
+        alertMobile(countAlert);
+        localStorage.setItem("countAlert", countAlert + 1);
+    }
+    console.log('countAlert: ' + countAlert);
+    console.log('lastHour: ' + lastHour);
+    console.log(currentHour);
 }

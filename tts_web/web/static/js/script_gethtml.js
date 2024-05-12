@@ -5,7 +5,7 @@ function removeAds() {
             var adsElements = document.getElementsByClassName('ads-iads');
             for (let item of adsElements)
                 item.remove();
-            var adshome = ['balloon-ads', 'hot-select', 'banner_image_home', 'is_show_slide', 'ads-300x250-detail-truyen-top', 'shoppe_ads_fly', 'ads-chapter-bottom-lien-quan']
+            var adshome = ['balloon-ads', 'hot-select', 'banner_image_home', 'is_show_slide', 'ads-300x250-detail-truyen-top', 'shoppe_ads_fly', 'ads-chapter-bottom-lien-quan', 'new-select']
             for (let item of adshome)
                 try {
                     document.getElementById(item).remove();
@@ -299,7 +299,7 @@ function alertMobile() {
     if (isMobileDevice()) {
         // Hiển thị cảnh báo
         var alertBox = document.createElement('div');
-        alertBox.innerHTML = "<p style='text-align: center; font-size: 25px;'>Trên điện thoại, vì tính năng 'Tiết kiệm pin' được tự động BẬT đối với trình duyệt nên việc tự động chuyển chương có thể bị ngắt quãng. Nếu nó xảy ra, bạn vui lòng vào ứng dụng Cài đặt ở mục 'Tiết kiệm pin' và TẮT đối với trình duyệt.</p>";
+        alertBox.innerHTML = "<p style='text-align: center; font-size: 25px;'>Trên điện thoại, vì tính năng 'Tiết kiệm pin' được tự động BẬT đối với trình duyệt nên việc tự động chuyển chương có thể bị ngắt quãng. Nếu nó xảy ra, bạn vui lòng vào ứng dụng Cài đặt ở mục 'Tiết kiệm pin' và TẮT đối với trình duyệt. <br> <span style='color: royalblue;'>(Bấm để ẩn)</span></p>";
         alertBox.style.backgroundColor = 'yellow';
         alertBox.style.position = 'fixed';
         alertBox.style.top = '50%';
@@ -320,29 +320,4 @@ function alertMobile() {
             clearTimeout(timeout);
         });
     }
-}
-
-var lastHour = localStorage.getItem("lastHour");
-var countAlert = localStorage.getItem("countAlert");
-if (countAlert === null)
-    localStorage.setItem("countAlert", 0);
-if (lastHour === null)
-    localStorage.setItem("lastHour", currentHour);
-
-var currentDate = new Date();
-var currentHour = parseInt(currentDate.getHours());
-
-if (localStorage.getItem("autoPlay") && isMobileDevice()) {
-    countAlert = parseInt(countAlert);
-    if (parseInt(lastHour) != currentHour) {
-        localStorage.setItem("countAlert", 0);
-        localStorage.setItem("lastHour", currentHour);
-    }
-    if (countAlert < 3) {
-        alertMobile(countAlert);
-        localStorage.setItem("countAlert", countAlert + 1);
-    }
-    console.log('countAlert: ' + countAlert);
-    console.log('lastHour: ' + lastHour);
-    console.log(currentHour);
 }

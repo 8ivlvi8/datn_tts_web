@@ -38,4 +38,4 @@ Khởi động máy chủ
 
 ## Demo
 
-Dự án đang được demo tại địa chỉ:  http://letam.myftp.org:8000/
+Dự án đang được demo tại địa chỉ:  https://letam.io.vn/

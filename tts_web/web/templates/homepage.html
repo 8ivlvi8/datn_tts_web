@@ -6,29 +6,29 @@ Trang chủ
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}">
-	<div class="p-3 mt-1">
-		<h1>Chuyển đổi văn bản tiếng Việt thành giọng nói</h1>
-		<textarea placeholder="Nhập văn bản" maxlength="4096" name="inputtext" id="inputtext"></textarea>
-		<p class="charCount"><span id="charCount">0</span>/4096 ký tự</p>
-		<div class="menu">
-			<div class="setVoice">
-				<span>Chọn giọng nói:</span>
-				<select name="voice" id="voice">
-					<option value="vi-VN-HoaiMyNeural" selected>Nữ - HoaiMy</option>
-					<option value="vi-VN-NamMinhNeural">Nam - NamMinh</option>
-				</select>
-			</div>
-			<div class="setSpeed">
-				Chọn tốc độ: <span id="speedValue"></span>
-				<input type="range" min="0" max="150" value="0" class="slider" id="myRange">
-			</div>
-			<br>
+<div class="p-3 mt-1">
+	<h1>Chuyển đổi văn bản tiếng Việt thành giọng nói</h1>
+	<textarea placeholder="Nhập văn bản" maxlength="4096" name="inputtext" id="inputtext"></textarea>
+	<p class="charCount"><span id="charCount">0</span>/4096 ký tự</p>
+	<div class="menu">
+		<div class="setVoice">
+			<span>Chọn giọng nói:</span>
+			<select name="voice" id="voice">
+				<option value="vi-VN-HoaiMyNeural" selected>Nữ - HoaiMy</option>
+				<option value="vi-VN-NamMinhNeural">Nam - NamMinh</option>
+			</select>
 		</div>
-		<button class="btn btn-lg btn-primary" id="convertBtn">Chuyển đổi</button>
-		<div class="loader" id="loader"></div>
-		<br> 
-		<audio controls id="audioPlayer"></audio>
+		<div class="setSpeed">
+			Chọn tốc độ: <span id="speedValue"></span>
+			<input type="range" min="0" max="150" value="0" class="slider" id="myRange">
+		</div>
+		<br>
 	</div>
+	<button class="btn btn-lg btn-primary" id="convertBtn">Chuyển đổi</button>
+	<div class="loader" id="loader"></div>
+	<br>
+	<audio controls id="audioPlayer"></audio>
+</div>
 
 <script src="{% static 'js/homepage.js' %}"></script>
 {% endblock %}

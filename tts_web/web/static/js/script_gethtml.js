@@ -278,10 +278,11 @@ function fetchAudio(url, text) {
                 if (!response.ok) {
                     throw new Error('Failed to fetch audio from API');
                 }
-                return response.blob(); // Chuyển đổi response thành Blob
+                // Chuyển đổi response thành Blob, một đối tượng chứa dữ liệu thô có thể được đọc dưới dạng dữ liệu nhị phân
+                return response.blob();
             })
             .then(blob => {
-                const audioURL = URL.createObjectURL(blob); // Tạo URL từ Blob
+                const audioURL = URL.createObjectURL(blob); // Tạo URL để gán cho audioPlayer và trả về
                 resolve(audioURL);
             })
             .catch(error => {
@@ -297,19 +298,9 @@ function isMobileDevice() {
 }
 function alertMobile() {
     if (isMobileDevice()) {
-        // Hiển thị cảnh báo
-        var alertBox = document.createElement('div');
-        alertBox.innerHTML = "<p style='text-align: center; font-size: 25px;'>Trên điện thoại, vì tính năng 'Tiết kiệm pin' được tự động BẬT đối với trình duyệt nên việc tự động chuyển chương có thể bị ngắt quãng. Nếu nó xảy ra, bạn vui lòng vào ứng dụng Cài đặt ở mục 'Tiết kiệm pin' và TẮT đối với trình duyệt. <br> <span style='color: royalblue;'>(Bấm để ẩn)</span></p>";
-        alertBox.style.backgroundColor = 'yellow';
-        alertBox.style.position = 'fixed';
-        alertBox.style.top = '50%';
-        alertBox.style.left = '5%';
-        alertBox.style.right = '5%';
-        alertBox.style.padding = '10px';
-        alertBox.style.border = '1px solid black';
-        alertBox.style.borderRadius = '5px';
-        alertBox.style.zIndex = '9999';
-        document.body.appendChild(alertBox);
+        // Hiển thị cảnh báo nếu thiết bị là điện thoại
+        var alertBox = document.getElementById('alertBox');
+        alertBox.style.display = 'block';
         // Hẹn giờ ẩn cảnh báo
         var timeout = setTimeout(function () {
             alertBox.style.display = 'none';

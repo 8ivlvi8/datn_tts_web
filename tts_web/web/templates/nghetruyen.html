@@ -70,6 +70,18 @@
 			transform: rotate(360deg);
 		}
 	}
+	#alertBox{
+		background-color: yellow;
+		position: fixed;
+		top: 50%;
+		left: 5%;
+		right: 5%;
+		padding: 10px;
+		border: 1px solid black;
+		border-radius: 5px;
+		z-index: 9999;
+		display: none;
+	}
 </style>
 <nav id="playerControl" class="navbar">
 	<div id="playbackSpeedControl">
@@ -92,6 +104,15 @@
 		<input type="checkbox" id="autoPlay" checked>
 	</div>
 </nav>
+
+
+<div id="alertBox">
+	<p style='text-align: center; font-size: 25px;'>Trên điện thoại, vì tính năng 'Tiết kiệm pin' được tự động BẬT đối
+		với trình duyệt nên việc tự động chuyển chương có thể bị ngắt quãng. Nếu nó xảy ra, bạn vui lòng vào ứng dụng
+		Cài đặt ở mục 'Tiết kiệm pin' và TẮT đối với trình duyệt.
+		<br> 
+		<span style='color: royalblue;'>(Bấm để ẩn)</span></p>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
 	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="

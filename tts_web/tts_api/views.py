@@ -9,36 +9,13 @@ import asyncio
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.template import loader
 
-
-class TTS_API_Get_Audio(APIView):
-    async def generate_audio(self, text, voice, output_file):
-        communicate = edge_tts.Communicate(text, voice)
-        await communicate.save(output_file)
-
-    def post(self, request, format=None):
-        # Nhận dữ liệu từ request
-        text = str(request.query_params['text'])
-        voice = str(request.query_params['voice'])
-        output_file = str(request.query_params['output_file'])
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        try:
-            loop.run_until_complete(
-                self.generate_audio(text, voice, output_file))
-        finally:
-            loop.close()
-        return JsonResponse({'message': f'Audio file {output_file} has been generated.'})
-
-
+# Hàm không đồng bộ trả về từng đoạn audio với input tương ứng 
 async def generate_audio_stream(text, voice, rate):
-    communicate = edge_tts.Communicate(text=text, voice=voice, pitch="+5Hz", rate=rate)
+    communicate = edge_tts.Communicate(text=text, voice=voice, rate=rate)
     async for chunk in communicate.stream():
         if chunk["type"] == "audio":
             yield chunk["data"]
-        # elif chunk["type"] == "WordBoundary":
-        #     print(f"WordBoundary: {chunk}")
-
-
+# API nhận các tham số từ client, gọi tới hàm lấy audio và trả về cho client ở dạng audio
 class TTS_API_Get_Audio_Stream(APIView):
     def post(self, request, format=None):
         text = request.query_params.get('text') or request.data.get('text')

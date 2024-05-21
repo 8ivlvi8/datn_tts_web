@@ -16,6 +16,50 @@ function removeAds() {
 }
 removeAds();
 
+// Chọn tất cả các phần tử có class 'navbar navbar-default navbar-static-top'
+let navbars = document.querySelectorAll('.navbar.navbar-default.navbar-static-top');
+// Duyệt qua từng phần tử được chọn
+navbars.forEach(navbar => {
+    // Tìm tất cả các phần tử con chứa cụm từ 'Đam Mỹ'
+    let elements = navbar.querySelectorAll('*:not(script):not(style)');
+    elements.forEach(element => {
+        if ((element.textContent.includes('Đam Mỹ') || element.textContent.includes('Bách Hợp') || element.textContent.includes('Sủng')) && element.children.length === 0) {
+            // Xóa phần tử thể loại không phù hợp
+            element.remove();
+        }
+    });
+});
+
+// Chọn tất cả các phần tử có class 'row' với cấu trúc tương tự
+let rows = document.querySelectorAll('.row[itemtype="https://schema.org/Book"]');
+// Duyệt qua từng phần tử được chọn
+rows.forEach(row => {
+    // Tìm các phần tử chứa thể loại 'Đam Mỹ'
+    const genreLinks = row.querySelectorAll('[itemprop="genre"]');
+    genreLinks.forEach(genreLink => {
+        if (genreLink.textContent.includes('Đam Mỹ') || genreLink.textContent.includes('Bách Hợp') || genreLink.textContent.includes('Sủng')) {
+            // Xóa phần tử nếu chứa cụm từ 'Đam Mỹ'
+            row.remove();
+        }
+    });
+});
+// 
+try {
+    document.querySelector("#list-page > div.col-xs-12.col-sm-12.col-md-3.col-truyen-side > div.visible-md-block.visible-lg-block.text-center > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(4)").remove();
+    document.querySelector("#list-page > div.col-xs-12.col-sm-12.col-md-3.col-truyen-side > div.visible-md-block.visible-lg-block.text-center > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(21)").remove();
+    document.querySelector("#list-page > div.col-xs-12.col-sm-12.col-md-3.col-truyen-side > div.visible-md-block.visible-lg-block.text-center > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(27)").remove();
+
+} catch (error) {
+
+}
+try {
+    document.querySelector("#list-index > div.col-md-4.col-truyen-side > div > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(4)").remove();
+    document.querySelector("#list-index > div.col-md-4.col-truyen-side > div > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(20)").remove();
+    document.querySelector("#list-index > div.col-md-4.col-truyen-side > div > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(25)").remove();
+
+} catch (error) {
+
+}
 // Xử lý tìm kiếm truyện
 var formElement = document.querySelector('.navbar-form.navbar-right');
 formElement.action = "";

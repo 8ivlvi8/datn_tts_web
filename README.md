@@ -13,7 +13,7 @@ Trên Window:
 
     - Cài đặt các gói cần thiết:
 ```bash
-        pip install django rest_framework django_rest_framework whitenoise requests bs4 edge_tts asyncio
+  pip install django rest_framework django_rest_framework whitenoise requests bs4 edge_tts asyncio
 ```
 ## Chạy local
 

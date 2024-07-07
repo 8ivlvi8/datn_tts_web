@@ -5,13 +5,12 @@ from web.templates import *
 from django.shortcuts import render
 from bs4 import BeautifulSoup
 import edge_tts
-import asyncio
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.template import loader
 
 # Hàm không đồng bộ trả về từng đoạn audio với input tương ứng 
 async def generate_audio_stream(text, voice, rate):
-    communicate = edge_tts.Communicate(text=text, voice=voice, rate=rate)
+    communicate = edge_tts.Communicate(text=text, voice=voice, rate=rate, volume="+80%")
     async for chunk in communicate.stream():
         if chunk["type"] == "audio":
             yield chunk["data"]

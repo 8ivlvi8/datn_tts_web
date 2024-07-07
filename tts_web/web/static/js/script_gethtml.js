@@ -1,6 +1,6 @@
 // Xóa các element quảng cáo
 function removeAds() {
-    for (let index = 0; index < 8; index++)
+    for (let index = 0; index < 20; index++)
         setTimeout(() => {
             var adsElements = document.getElementsByClassName('ads-iads');
             for (let item of adsElements)
@@ -12,7 +12,7 @@ function removeAds() {
                 } catch (error) {
                 }
             console.log(index);
-        }, index * 1500); // Việc xóa lặp lại do các element load chậm
+        }, index * 500); // Việc xóa lặp lại do các element load chậm
 }
 removeAds();
 

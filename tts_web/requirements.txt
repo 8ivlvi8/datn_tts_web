@@ -1,5 +1,4 @@
 django
-rest_framework
 django_rest_framework
 whitenoise
 requests

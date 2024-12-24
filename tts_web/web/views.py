@@ -30,16 +30,16 @@ class Get_html(APIView):
     @xframe_options_exempt
     def get(self, request, format=None):
         # Lấy nội dung HTML từ URL
-        url = request.query_params.get('url') or request.data.get('url') or 'https://truyenfull.vn/'
-        if not (url.startswith('https://truyenfull.vn')):
+        url = request.query_params.get('url') or request.data.get('url') or 'https://truyenfull.io'
+        if not (url.startswith('https://truyenfull')):
             return HttpResponse(loader.get_template('404.html').render(), status=404)
         # Xử lý nếu là tìm kiếm truyện
         tukhoa = request.query_params.get('tukhoa') or request.data.get('tukhoa')
         if tukhoa:
-            url = (f"https://truyenfull.vn/tim-kiem/?tukhoa=" + str(tukhoa).strip())
+            url = (f"https://truyenfull.io/tim-kiem/?tukhoa=" + str(tukhoa).strip())
         try:
             result = Get_html.get_html(url)
         except:
-            result = Get_html.get_html("https://truyenfull.vn/danh-sach/truyen-hot/")
+            result = Get_html.get_html("https://truyenfull.io/danh-sach/truyen-hot/")
         # Trả về kết quả dưới dạng HttpResponse
         return HttpResponse(result, status=200)

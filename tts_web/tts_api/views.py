@@ -30,7 +30,7 @@ class TTS_API_Get_List_Chapter(APIView):
         truyen_id = request.query_params.get(
             'truyen_id') or request.data.get('truyen_id')
         response = requests.get(
-            "https://truyenfull.vn/ajax.php", params={'type': 'chapter_option', 'data': truyen_id})
+            "https://truyenfull.io/ajax.php", params={'type': 'chapter_option', 'data': truyen_id})
         html_content = response.text.replace('chapter_jump', '')
         list_chapter = BeautifulSoup(
             html_content, 'html.parser').prettify().encode('utf-8')

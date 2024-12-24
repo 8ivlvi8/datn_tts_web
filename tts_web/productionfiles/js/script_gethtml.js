@@ -1,65 +1,22 @@
 // Xóa các element quảng cáo
 function removeAds() {
-    for (let index = 0; index < 8; index++)
+    for (let index = 0; index < 20; index++)
         setTimeout(() => {
             var adsElements = document.getElementsByClassName('ads-iads');
             for (let item of adsElements)
                 item.remove();
-            var adshome = ['balloon-ads', 'hot-select', 'banner_image_home', 'is_show_slide', 'ads-300x250-detail-truyen-top', 'shoppe_ads_fly', 'ads-chapter-bottom-lien-quan', 'new-select']
+            var adshome = ['balloon-ads', 'hot-select', 'ads-xuyentrang-bottom', 'banner_image_home', 'is_show_slide', 'ads-300x250-detail-truyen-top', 'shoppe_ads_fly', 'ads-chapter-bottom-lien-quan', 'header-ads-full', 'new-select']
             for (let item of adshome)
                 try {
                     document.getElementById(item).remove();
                 } catch (error) {
                 }
             console.log(index);
-        }, index * 1500); // Việc xóa lặp lại do các element load chậm
+        }, index * 500); // Việc xóa lặp lại do các element load chậm
 }
 removeAds();
 
-// Chọn tất cả các phần tử có class 'navbar navbar-default navbar-static-top'
-let navbars = document.querySelectorAll('.navbar.navbar-default.navbar-static-top');
-// Duyệt qua từng phần tử được chọn
-navbars.forEach(navbar => {
-    // Tìm tất cả các phần tử con chứa cụm từ 'Đam Mỹ'
-    let elements = navbar.querySelectorAll('*:not(script):not(style)');
-    elements.forEach(element => {
-        if ((element.textContent.includes('Đam Mỹ') || element.textContent.includes('Bách Hợp') || element.textContent.includes('Sủng')) && element.children.length === 0) {
-            // Xóa phần tử thể loại không phù hợp
-            element.remove();
-        }
-    });
-});
 
-// Chọn tất cả các phần tử có class 'row' với cấu trúc tương tự
-let rows = document.querySelectorAll('.row[itemtype="https://schema.org/Book"]');
-// Duyệt qua từng phần tử được chọn
-rows.forEach(row => {
-    // Tìm các phần tử chứa thể loại 'Đam Mỹ'
-    const genreLinks = row.querySelectorAll('[itemprop="genre"]');
-    genreLinks.forEach(genreLink => {
-        if (genreLink.textContent.includes('Đam Mỹ') || genreLink.textContent.includes('Bách Hợp') || genreLink.textContent.includes('Sủng')) {
-            // Xóa phần tử nếu chứa cụm từ 'Đam Mỹ'
-            row.remove();
-        }
-    });
-});
-// 
-try {
-    document.querySelector("#list-page > div.col-xs-12.col-sm-12.col-md-3.col-truyen-side > div.visible-md-block.visible-lg-block.text-center > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(4)").remove();
-    document.querySelector("#list-page > div.col-xs-12.col-sm-12.col-md-3.col-truyen-side > div.visible-md-block.visible-lg-block.text-center > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(21)").remove();
-    document.querySelector("#list-page > div.col-xs-12.col-sm-12.col-md-3.col-truyen-side > div.visible-md-block.visible-lg-block.text-center > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(27)").remove();
-
-} catch (error) {
-
-}
-try {
-    document.querySelector("#list-index > div.col-md-4.col-truyen-side > div > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(4)").remove();
-    document.querySelector("#list-index > div.col-md-4.col-truyen-side > div > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(20)").remove();
-    document.querySelector("#list-index > div.col-md-4.col-truyen-side > div > div.list.list-truyen.list-cat.col-xs-12 > div.row > div:nth-child(25)").remove();
-
-} catch (error) {
-
-}
 // Xử lý tìm kiếm truyện
 var formElement = document.querySelector('.navbar-form.navbar-right');
 formElement.action = "";
@@ -109,12 +66,12 @@ var anchorLinks = document.querySelectorAll('a');
 anchorLinks.forEach(function (anchor) {
     anchor.addEventListener('click', function (event) {
         event.preventDefault();
-        direct(anchor.getAttribute('href'));
+        directt(anchor.getAttribute('href'));
     });
 });
-function direct(href) {
+function directt(href) {
     console.log('Đã click vào link với href là: ' + href);
-    if (href.startsWith("https://truyenfull.vn"))
+    if (href.startsWith("https://truyenfull"))
         window.location.href = prefix + href;
     else
         window.location.href = href;
@@ -322,11 +279,22 @@ function fetchAudio(url, text) {
                 if (!response.ok) {
                     throw new Error('Failed to fetch audio from API');
                 }
-                // Chuyển đổi response thành Blob, một đối tượng chứa dữ liệu thô có thể được đọc dưới dạng dữ liệu nhị phân
                 return response.blob();
             })
             .then(blob => {
-                const audioURL = URL.createObjectURL(blob); // Tạo URL để gán cho audioPlayer và trả về
+                // Kiểm tra nếu blob rỗng
+                if (blob.size === 0) {
+                    console.warn('Received empty blob, retrying with default text...');
+                    if (text !== "Đoạn này lỗi") {
+                        // Gọi lại hàm với nội dung mặc định
+                        return fetchAudio(url, "Đoạn này lỗi").then(resolve).catch(reject);
+                    } else {
+                        throw new Error('Failed with default text, received empty blob');
+                    }
+                }
+
+                // Nếu blob không rỗng, tạo audioURL và trả về
+                const audioURL = URL.createObjectURL(blob);
                 resolve(audioURL);
             })
             .catch(error => {

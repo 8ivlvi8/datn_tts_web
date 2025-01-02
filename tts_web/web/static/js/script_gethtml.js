@@ -1,20 +1,20 @@
-// Xóa các element quảng cáo
-function removeAds() {
-    for (let index = 0; index < 20; index++)
-        setTimeout(() => {
-            var adsElements = document.getElementsByClassName('ads-iads');
-            for (let item of adsElements)
-                item.remove();
-            var adshome = ['balloon-ads', 'hot-select', 'ads-xuyentrang-bottom', 'banner_image_home', 'is_show_slide', 'ads-300x250-detail-truyen-top', 'shoppe_ads_fly', 'ads-chapter-bottom-lien-quan', 'header-ads-full', 'new-select']
-            for (let item of adshome)
-                try {
-                    document.getElementById(item).remove();
-                } catch (error) {
-                }
-            console.log(index);
-        }, index * 500); // Việc xóa lặp lại do các element load chậm
-}
-removeAds();
+// // Xóa các element quảng cáo
+// function removeAds() {
+//     for (let index = 0; index < 20; index++)
+//         setTimeout(() => {
+//             var adsElements = document.getElementsByClassName('ads-iads');
+//             for (let item of adsElements)
+//                 item.remove();
+//             var adshome = ['balloon-ads', 'hot-select', 'ads-xuyentrang-bottom', 'banner_image_home', 'is_show_slide', 'ads-300x250-detail-truyen-top', 'shoppe_ads_fly', 'ads-chapter-bottom-lien-quan', 'header-ads-full', 'new-select']
+//             for (let item of adshome)
+//                 try {
+//                     document.getElementById(item).remove();
+//                 } catch (error) {
+//                 }
+//             console.log(index);
+//         }, index * 500); // Việc xóa lặp lại do các element load chậm
+// }
+// removeAds();
 
 
 // Xử lý tìm kiếm truyện
@@ -92,9 +92,12 @@ function updatecurrentSpeed() {
 }
 // Hàm cập nhật tự động phát audio vào localStorage
 function updateAutoPlay() {
-    localStorage.setItem("autoPlay", autoPlay.checked);
-    if (autoPlay.checked)
+    var apvalue = parseInt(autoPlay.value);
+    if (apvalue !== 0)
         alertMobile();
+    autoPlay.value = apvalue;
+    autoPlayValue = apvalue;
+    localStorage.setItem("autoPlay", autoPlayValue);
 }
 
 // Các biến dùng khi trong chương truyện
@@ -134,10 +137,9 @@ if (content) {
 
         // Lấy giá trị tự động phát để lưu và cập nhật
         autoPlay = document.getElementById("autoPlay");
-        if (autoPlayValue !== null)
-            autoPlay.checked = (autoPlayValue === "true");
-        else
-            autoPlay.checked = false;
+        if (autoPlayValue !== null) {
+            autoPlay.value = autoPlayValue;
+        }
         autoPlay.addEventListener("change", updateAutoPlay);
 
         // Lấy giá trị tốc độ phát để lưu và cập nhật 
@@ -189,7 +191,7 @@ if (content) {
         console.log(textData);
 
         // Nếu bật tự động phát, bấm vào nút Phát
-        if (autoPlayValue === "true")
+        if (parseInt(autoPlay.value) != 0)
             playAudioButton.click();
     });
 }
@@ -258,8 +260,12 @@ function playAudio() {
         hideLoader(); // Ẩn biểu tượng loading trong trường hợp lỗi
     }).finally(function () {
         hideLoader();
-        if (autoPlay.checked)
+        if (autoPlay.value != 0) {
+            if (autoPlay.value > 0)
+                autoPlay.value = parseInt(autoPlay.value) - 1;
+            updateAutoPlay();
             next_chap_elements[0].click();
+        }
     });
 }
 // Hàm để fetch audio từ API

@@ -18,10 +18,16 @@ class Get_html(APIView):
         response = requests.get(url)
         html_content = response.text
         soup = BeautifulSoup(html_content, 'html.parser')
+        # Tìm và loại bỏ đoạn script cần xóa
+        unwanted_script = soup.find('script', src="https://static.truyenfull.io/min/g/mainjs-02012025_1.js")
+        if unwanted_script:
+            unwanted_script.decompose()
         # Tạo một thẻ <script> mới
         new_script_tag = soup.new_tag("script", src="/static/js/script_gethtml.js")
+        new_script_tag1 = soup.new_tag("script", src="/static/js/mainjs-02012025.js")
         # Thêm script vào cuối <body>
         body_tag = soup.find('body')
+        body_tag.append(new_script_tag1)
         body_tag.append(new_script_tag)
         # Chuyển đổi lại thành chuỗi HTML với mã script được thêm vào
         html_with_script = soup.prettify().encode('utf-8')
